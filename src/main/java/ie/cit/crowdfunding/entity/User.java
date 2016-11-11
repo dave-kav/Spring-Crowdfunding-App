@@ -1,6 +1,17 @@
 package ie.cit.crowdfunding.entity;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  * 
@@ -11,13 +22,23 @@ import java.util.ArrayList;
  */
 public class User {
 	
-	private int userid; 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userid;
+	@Column(name="full_name")
 	private String fullName;
+	@Column(name="user_name")
 	private String userName;
+	@Column(name="password")
 	private String password;
+	@Column(name="credit_limit")
 	private float creditLimit;
 	// list of projects that the user owns
-	private ArrayList<Project> projects;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinTable(name="artist_movements",
+		joinColumns={@JoinColumn(name="artist_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="movement_id", referencedColumnName="id")})
+	public List<Project> projects;
 	// list of pledges made by the user
 	private ArrayList<Pledge> pledges;
 		
@@ -61,7 +82,7 @@ public class User {
 		this.creditLimit = creditLimit;
 	}
 	
-	public ArrayList<Project> getProjects() {
+	public List<Project> getProjects() {
 		return projects;
 	}
 	

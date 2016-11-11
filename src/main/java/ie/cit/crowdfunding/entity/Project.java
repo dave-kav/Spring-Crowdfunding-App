@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class Project {
 	
+	private int projectId;
 	private String name;
 	private String description;
 	private String imgUrl;
@@ -25,8 +26,16 @@ public class Project {
 	 * project has reference to owner for easier implementation
 	 * of user's ability to edit their own projects 
 	 */
-	private User projectOwner;
+	private int projectOwnerID;
 	
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -75,12 +84,12 @@ public class Project {
 		this.pledges = pledges;
 	}
 	
-	public User getProjectOwner() {
-		return projectOwner;
+	public int getProjectOwner() {
+		return projectOwnerID;
 	}
 	
-	public void setProjectOwner(User projectOwner) {
-		this.projectOwner = projectOwner;
+	public void setProjectOwner(int projectOwnerID) {
+		this.projectOwnerID = projectOwnerID;
 	}
 	
 	@Override

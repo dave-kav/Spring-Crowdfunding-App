@@ -9,18 +9,27 @@ package ie.cit.crowdfunding.entity;
  */
 public class Pledge {
 	
+	private int pledgeId;
 	private float amount;
 	/**
 	 * is it beneficial for pledge to know which project it 
 	 * belongs to or is it sufficient for each project 
 	 * to know its own pledges?
 	 */
-	private Project project;
+	private int projectId;
 	/**
 	 * user can cancel a pledge, but not after a project's
 	 * time limit has expired 
 	 */
 	private boolean canBeCancelled;
+	
+	public int getPledgeId() {
+		return pledgeId;
+	}
+
+	public void setPledgeId(int pledgeId) {
+		this.pledgeId = pledgeId;
+	}
 	
 	public float getAmount() {
 		return amount;
@@ -30,12 +39,12 @@ public class Pledge {
 		this.amount = amount;
 	}
 
-	public Project getProject() {
-		return project;
+	public int getProjectId() {
+		return projectId;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
 	}
 
 	public boolean isCanBeCancelled() {
