@@ -38,6 +38,7 @@ public class User {
 	
 	// list of projects that the user owns
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(name="user_projects",
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="project_id", referencedColumnName="id")})

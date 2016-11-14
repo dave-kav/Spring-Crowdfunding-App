@@ -25,22 +25,18 @@ public class Project {
 	private int id;
 	private String name;
 	private String description;
-	private String imgUrl;
+	private String image;
 	private float goalAmt;
 	/**
 	 * int value representing number of days remaining,
 	 * easier than messing around with dates  
 	 */
 	private int timeLimit; 
-	
-	@ManyToMany(mappedBy="projects")
-	private List<Pledge> pledges;
-	/**
-	 * project has reference to owner for easier implementation
-	 * of user's ability to edit their own projects 
-	 */
+
 	@ManyToMany(mappedBy="projects")
 	private List<User> users;
+	@ManyToMany(mappedBy="projects")
+	private List<Pledge> pledges;
 	
 	public int getProjectId() {
 		return id;
@@ -67,11 +63,11 @@ public class Project {
 	}
 	
 	public String getImgUrl() {
-		return imgUrl;
+		return image;
 	}
 	
 	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+		this.image = imgUrl;
 	}
 	
 	public float getGoalAmt() {
