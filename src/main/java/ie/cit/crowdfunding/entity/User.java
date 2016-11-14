@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * 
@@ -20,34 +24,39 @@ import javax.persistence.ManyToMany;
  * @author Darren Smith
  *
  */
+@Entity
+@Table(name="users")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int userid;
-	@Column(name="full_name")
+	private int id;
 	private String fullName;
-	@Column(name="user_name")
 	private String userName;
-	@Column(name="password")
 	private String password;
-	@Column(name="credit_limit")
 	private float creditLimit;
+	
 	// list of projects that the user owns
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinTable(name="artist_movements",
-		joinColumns={@JoinColumn(name="artist_id", referencedColumnName="id")},
-		inverseJoinColumns={@JoinColumn(name="movement_id", referencedColumnName="id")})
+	@JoinTable(name="user_projects",
+		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="project_id", referencedColumnName="id")})
 	public List<Project> projects;
+	
 	// list of pledges made by the user
-	private ArrayList<Pledge> pledges;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinTable(name="user_pledges",
+		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
+	private List<Pledge> pledges;
 		
 	public int getUserid() {
-		return userid;
+		return id;
 	}
 	
 	public void setUserid(int userid) {
-		this.userid = userid;
+		this.id = userid;
 	}
 	
 	public String getFullName() {
@@ -90,7 +99,7 @@ public class User {
 		this.projects = projects;
 	}
 	
-	public ArrayList<Pledge> getPledges() {
+	public List<Pledge> getPledges() {
 		return pledges;
 	}
 	
@@ -100,7 +109,16 @@ public class User {
 	
 	@Override
 	public String toString() {
-		String out = "";
+		String out = "User [id=" + id + ", fullname=" + fullName + ", username=" + userName
+				+ ", creditlimit=" + creditLimit + ", projects =[";
+		for (Project p: projects) {
+			out += p.toString() + ", ";
+		}
+		out += "], pledges=[";
+		for (Pledge p: pledges) {
+			out += p.toString() + ", ";
+		}
+		out += "]]";
 		//implement
 		return out;
 	}

@@ -1,6 +1,13 @@
 package ie.cit.crowdfunding.entity;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  * 
@@ -9,9 +16,13 @@ import java.util.ArrayList;
  * @author Darren Smith
  *
  */
+@Entity
+@Table(name="projects")
 public class Project {
 	
-	private int projectId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private String name;
 	private String description;
 	private String imgUrl;
@@ -21,19 +32,22 @@ public class Project {
 	 * easier than messing around with dates  
 	 */
 	private int timeLimit; 
-	private ArrayList<Pledge> pledges;
+	
+	@ManyToMany(mappedBy="projects")
+	private List<Pledge> pledges;
 	/**
 	 * project has reference to owner for easier implementation
 	 * of user's ability to edit their own projects 
 	 */
-	private int projectOwnerID;
+	@ManyToMany(mappedBy="projects")
+	private List<User> users;
 	
 	public int getProjectId() {
-		return projectId;
+		return id;
 	}
 
 	public void setProjectId(int projectId) {
-		this.projectId = projectId;
+		this.id = projectId;
 	}
 
 	public String getName() {
@@ -76,25 +90,10 @@ public class Project {
 		this.timeLimit = timeLimit;
 	}
 	
-	public ArrayList<Pledge> getPledges() {
-		return pledges;
-	}
-	
-	public void setPledges(ArrayList<Pledge> pledges) {
-		this.pledges = pledges;
-	}
-	
-	public int getProjectOwner() {
-		return projectOwnerID;
-	}
-	
-	public void setProjectOwner(int projectOwnerID) {
-		this.projectOwnerID = projectOwnerID;
-	}
-	
 	@Override
 	public String toString() {
-		String out = "";
+		String out = "project [id=" + id + ", name=" + name + ", description=" + description
+				+ ", goal amount=" + goalAmt + "]";
 		return out;
 	}
 

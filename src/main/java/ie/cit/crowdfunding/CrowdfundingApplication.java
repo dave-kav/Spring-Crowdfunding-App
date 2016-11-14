@@ -1,17 +1,28 @@
 package ie.cit.crowdfunding;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ie.cit.crowdfunding.entity.Pledge;
+import ie.cit.crowdfunding.entity.Project;
+import ie.cit.crowdfunding.entity.User;
+import ie.cit.crowdfunding.repository.PledgeRepository;
+import ie.cit.crowdfunding.repository.ProjectRepository;
 import ie.cit.crowdfunding.repository.UserRepository;
 
 @SpringBootApplication
 public class CrowdfundingApplication  implements CommandLineRunner {
 
 	@Autowired
-	UserRepository userRepo;
+	UserRepository userRepository;
+	@Autowired
+	PledgeRepository pledgeRepository;
+	@Autowired
+	ProjectRepository projectRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrowdfundingApplication.class, args);
@@ -19,7 +30,32 @@ public class CrowdfundingApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
+		System.out.println("----------Projects----------");
+		projectTest();
+		System.out.println("----------Pledges----------");
+		pledgeTest();
+		System.out.println("----------Users----------");
+		userTest();
+	}
+	
+	public void userTest() {
+		List<User> users = (List<User>) userRepository.findAll();
+		for (User u: users) {
+			System.out.println(u.toString());
+		}
+	}
+	
+	public void pledgeTest() {
+		List<Pledge> pledges = (List<Pledge>) pledgeRepository.findAll();
+		for (Pledge p: pledges) {
+			System.out.println(p.toString());
+		}
+	}
+	
+	public void projectTest() {
+		List<Project> projects = (List<Project>) projectRepository.findAll();
+		for (Project p: projects) {
+			System.out.println(p.toString());
+		}
 	}
 }

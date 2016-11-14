@@ -1,5 +1,14 @@
 package ie.cit.crowdfunding.entity;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 /**
  * 
  * @author Dave Kavanagh	
@@ -7,28 +16,33 @@ package ie.cit.crowdfunding.entity;
  * @author Darren Smith
  *
  */
+@Entity
+@Table(name="pledges")
 public class Pledge {
 	
-	private int pledgeId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private float amount;
-	/**
-	 * is it beneficial for pledge to know which project it 
-	 * belongs to or is it sufficient for each project 
-	 * to know its own pledges?
-	 */
-	private int projectId;
 	/**
 	 * user can cancel a pledge, but not after a project's
 	 * time limit has expired 
 	 */
-	private boolean canBeCancelled;
+	private boolean permanent;
+	private int projectId;
+	
+	@ManyToMany(mappedBy="pledges")
+	private List<User> users;
+	
+	@ManyToMany
+	private List<Project> projects;
 	
 	public int getPledgeId() {
-		return pledgeId;
+		return id;
 	}
 
 	public void setPledgeId(int pledgeId) {
-		this.pledgeId = pledgeId;
+		this.id = pledgeId;
 	}
 	
 	public float getAmount() {
@@ -39,6 +53,14 @@ public class Pledge {
 		this.amount = amount;
 	}
 
+	public boolean isPermanet() {
+		return permanent;
+	}
+
+	public void setPermanent(boolean permanent) {
+		this.permanent = permanent;
+	}
+	
 	public int getProjectId() {
 		return projectId;
 	}
@@ -47,16 +69,10 @@ public class Pledge {
 		this.projectId = projectId;
 	}
 
-	public boolean isCanBeCancelled() {
-		return canBeCancelled;
-	}
-
-	public void setCanBeCancelled(boolean canBeCancelled) {
-		this.canBeCancelled = canBeCancelled;
-	}
 
 	public String toString() {
-		String out = "";
+		String out = "pledge [id=" + id + ", amount=" + amount + ", permanent=" + permanent 
+				+ ", project=" + projectId + "]";
 		return out;
 	}
 }
