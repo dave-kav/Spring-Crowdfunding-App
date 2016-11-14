@@ -120,7 +120,6 @@ public class User {
 			out += p.toString() + ", ";
 		}
 		out += "]]";
-		//implement
 		return out;
 	}
 }

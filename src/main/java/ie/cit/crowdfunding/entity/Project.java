@@ -2,12 +2,19 @@ package ie.cit.crowdfunding.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * 
@@ -35,7 +42,13 @@ public class Project {
 
 	@ManyToMany(mappedBy="projects")
 	private List<User> users;
-	@ManyToMany(mappedBy="projects")
+	
+	// list of pledges made to this project
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinTable(name="project_pledges",
+		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private List<Pledge> pledges;
 	
 	public int getProjectId() {

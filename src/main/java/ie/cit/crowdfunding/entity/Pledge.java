@@ -34,9 +34,6 @@ public class Pledge {
 	@ManyToMany(mappedBy="pledges")
 	private List<User> users;
 	
-	@ManyToMany
-	private List<Project> projects;
-	
 	public int getPledgeId() {
 		return id;
 	}
@@ -68,7 +65,6 @@ public class Pledge {
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
 	}
-
 
 	public String toString() {
 		String out = "pledge [id=" + id + ", amount=" + amount + ", permanent=" + permanent 
