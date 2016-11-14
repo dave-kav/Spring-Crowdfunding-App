@@ -41,15 +41,3 @@
 * 10% - JUnit classes / TDD test cases
 * 10% - Validation with either Hibernate Validator or Spring Validator
 * 10% - Additional feature(s) (functional or technological), which you must highlight when submitting
-
-***
-
-# Planning #
-
-* Of the requirements listed in step 6 above, JPA may not and H2 will not, be required due to use of MongoDB. Clarification to be sought from Larkin in next class/lab.
-    * Potentially useful resources for info on using MongoDB:  
-        <http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-nosql.html>  
-        <http://docs.spring.io/spring-data/mongodb/docs/current/reference/html/>  
-        <http://stackoverflow.com/questions/23515295/spring-boot-and-how-to-configure-connection-details-to-mongodb>
-    * May be possible to use embedded MongoDB, not sure, otherwise <https://mlab.com/> is probably best bet.
-* Clarification also to be sought on whether use of MongoDB alone is enough to secure the 10% allocated for inclusion of artifacts not specifically detailed in the brief, or whether another resource e.g. Internationalization is to be considered.
