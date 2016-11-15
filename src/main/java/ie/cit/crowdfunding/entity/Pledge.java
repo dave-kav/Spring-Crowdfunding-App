@@ -29,7 +29,6 @@ public class Pledge {
 	 * time limit has expired 
 	 */
 	private boolean permanent;
-	private int projectId;
 	
 	@ManyToMany(mappedBy="pledges")
 	private List<User> users;
@@ -58,17 +57,9 @@ public class Pledge {
 		this.permanent = permanent;
 	}
 	
-	public int getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
-	}
-
 	public String toString() {
 		String out = "pledge [id=" + id + ", amount=" + amount + ", permanent=" + permanent 
-				+ ", project=" + projectId + "]";
+				+ "]";
 		return out;
 	}
 }

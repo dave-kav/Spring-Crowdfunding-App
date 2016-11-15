@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>KickFunder</title>
+</head>
+
+<body>
+	
+	<table>
+      <tr>
+        <th>USER NAME</th>
+        <th>FULL NAME</th>
+      </tr>
+      <tr th:each="user : ${user_list}">
+		<td th:text="${user.userName}">Davykav</td>
+        <td th:text="${user.fullName}">Dave Kavanagh</td>
+      </tr>
+    </table>
+
+</body>
+</html>

@@ -6,12 +6,12 @@ INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit) VALUES
 INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit) VALUES (2, 'Dialect: A Game about Language and How it Dies', 'Build a language, build a world. Who were the Isolation, and how were they lost? In this game, your language is the story.', 'https://ksr-ugc.imgix.net/assets/014/233/249/f0daaca7912d700d58bd3e060588e987_original.png?w=680&fit=max&v=1477272636&auto=format&lossless=true&s=e252984bb5348f17783ef41b0bf1a7e5', 3000, 15);
 INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit) VALUES (3, 'Findster Duo - The 1st GPS Pet Tracker Free of Monthly Fees!', 'Findster Duo tracks your pets’ location using GPS with no data fees, and rewards you for keeping them healthy! Smart. Connected. Fun.', 'https://ksr-ugc.imgix.net/assets/012/925/070/6710c78aee17b9225cf4ccd1a1194f7f_original.png?w=680&fit=max&v=1467382915&auto=format&lossless=true&s=e412ed1cd0b66d859de6a3eec4fcaf80', 50000, 45);
 
-INSERT INTO Pledges VALUES (1, 150, false, 1);
-INSERT INTO Pledges VALUES (2, 100, false, 1);
-INSERT INTO Pledges VALUES (3, 50, false, 1);
-INSERT INTO Pledges VALUES (4, 70, false, 2);
-INSERT INTO Pledges VALUES (5, 500, false, 2);
-INSERT INTO Pledges VALUES (6, 100, false, 3);
+INSERT INTO Pledges VALUES (1, 150, false);
+INSERT INTO Pledges VALUES (2, 100, false);
+INSERT INTO Pledges VALUES (3, 50, false);
+INSERT INTO Pledges VALUES (4, 70, false);
+INSERT INTO Pledges VALUES (5, 500, false);
+INSERT INTO Pledges VALUES (6, 100, false);
 
 INSERT INTO User_projects VALUES (1,1), (2,2), (3,3);
 
