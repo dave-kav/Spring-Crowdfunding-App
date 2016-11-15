@@ -6,17 +6,20 @@
   font-weight: 300;
 }
 body {
+  margin-top: 2.5em
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
 }
 body ::-webkit-input-placeholder {
   /* WebKit browsers */
+  margin-top: 2.5em
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
 }
 body :-moz-placeholder {
+	margin-top: 2.5em
   /* Mozilla Firefox 4 to 18 */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
@@ -24,6 +27,7 @@ body :-moz-placeholder {
   font-weight: 300;
 }
 body ::-moz-placeholder {
+	margin-top: 2.5em
   /* Mozilla Firefox 19+ */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
@@ -31,6 +35,7 @@ body ::-moz-placeholder {
   font-weight: 300;
 }
 body :-ms-input-placeholder {
+	margin-top: 2.5em
   /* Internet Explorer 10+ */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
@@ -46,24 +51,27 @@ body :-ms-input-placeholder {
   height: 100%;
   overflow: hidden;
 }
-.wrapper.form-success .container h1 {
+.wrapper.form-success .container1 h1 {
   -webkit-transform: translateY(85px);
           transform: translateY(85px);
+          font-color: white;
 }
-.container {
+.container1 {
   max-width: 600px;
   margin: 0 auto;
   padding: 80px 0;
   height: 400px;
   text-align: center;
+  font-color: white;
 }
-.container h1 {
+.container1 h1 {
   font-size: 40px;
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
   -webkit-transition-timing-function: ease-in-put;
           transition-timing-function: ease-in-put;
   font-weight: 200;
+  font-color: white;
 }
 form {
   padding: 20px 0;
