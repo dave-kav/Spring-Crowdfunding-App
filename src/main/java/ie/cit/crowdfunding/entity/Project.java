@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -47,6 +48,12 @@ public class Project {
 		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private List<Pledge> pledges;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinTable(name="user_projects",
+		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="project_id", referencedColumnName="id")})
+	private User user;
 	
 	public int getId() {
 		return id;
@@ -102,6 +109,14 @@ public class Project {
 
 	public void setPledges(List<Pledge> pledges) {
 		this.pledges = pledges;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

@@ -15,25 +15,35 @@
 
 	<div class="container">
     <div class="row">
-        <div class="col-md-3">
-        <p class="lead">Pledges</p>
-            <div class="list-group">
-                <li class="list-group-item" th:each="pledge : ${project.pledges}" th:text="${pledge.amount}"></li>
-            </div>
-        </div>
-        <div class="col-md-9">
+        <div class="col-md-7">
             <div class="thumbnail">
                 <img class="img-responsive" th:src="${project.image}"></img>
                 <div class="caption-full">
-                    <h4 class="pull-right" th:text="${project.goalAmt}"></h4>
-                    <h4 class="pull-right" th:text="${project.timeLimit}"></h4>
+                	<div class="pull-right">
+                		<h4>
+                			Target: <i class="fa fa-eur" aria-hidden="true"></i>
+                    		<span th:text="${project.goalAmt}"></span>
+                   		</h4>
+                	</div>
+                    <div class="pull-right">
+						<h4>Time Remaining: <span th:text="${project.timeLimit}"></span> days</h4>                    
+                    </div>
                     <h4 th:text="${project.name}"><a></a></h4>
                     <p th:text="${project.description}"></p>    
-                    <p>
-                        <!-- user name here <em></em> -->
+                    <p> Submitted by 
+                        <em th:text="${project.user.userName}"></em>
                     </p>
                     <button class="btn btn-warning">Edit</button>               
                 </div>
+            </div>
+        </div>
+         <div class="col-md-3">
+        <p class="lead">Pledges</p>
+            <div class="list-group">
+                <li class="list-group-item" th:each="pledge : ${project.pledges}">
+                	<span th:text="${pledge.user.userName}"></span>
+                	<span class="pull-right"><i class="fa fa-eur" aria-hidden="true"></i><span th:text="${pledge.amount}">></span></span>
+                </li>
             </div>
         </div>
     </div>

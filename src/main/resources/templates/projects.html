@@ -16,27 +16,32 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1><i class="fa fa-money" aria-hidden="true"></i> KickFundr</h1>
-			<p>Crowd fund your to make your vision a reality!</p>
+			<p>Crowd fund your vision to make it a reality!</p>
 		</div>	
 	
 		<div class="row" style="display:flex: flex-wrap: wrap;">	
 			<div class="col-lg-4 col-md-3 col-sm-6" th:each="project : ${project_list}">
 				<div class="thumbnail">
+					<a th:href="@{/projects/} + ${project.id}"><img th:src="${project.image}"></img></a>
 					<div class="caption">
 	                    <h3 th:text="${project.name}"></h3>
 	                </div>
-					<a th:href="@{/projects/} + ${project.id}"><img th:src="${project.image}"></img></a>
+					<div class="caption-full">
+						<p th:text="${project.description}"></p>
+						<div class="pull-right">
+							<h4>Target</h4>
+							<p th:text="${project.goalAmt}"></p>
+						</div>
+						<p></p>
+						<div>
+							<h4>Time Remaining</h4>
+							<p th:text="${project.timeLimit}"></p>
+						</div>
+					</div>
+					<p>
+	                    <a th:href="@{/projects/} + ${project.id}" class="btn btn-primary">More Info</a>
+	                </p>
 				</div>
-				<div class="container_float">
-					<p th:text="${project.description}"></p>
-					<h4>Target</h4>
-					<p th:text="${project.goalAmt}"></p>
-					<h4>Time Remaining</h4>
-					<p th:text="${project.timeLimit}"></p>
-				</div>
-				<p>
-                    <a th:href="@{/projects/} + ${project.id}" class="btn btn-primary">More Info</a>
-                </p>
 			</div>
 		</div>
 	</div>

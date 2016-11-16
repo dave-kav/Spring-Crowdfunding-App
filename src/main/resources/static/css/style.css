@@ -30,3 +30,8 @@ body {
 .conainer_float {
 	float: right;
 }
+
+.conainer_float_left {
+	float: left;
+	clear: none;
+}

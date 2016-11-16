@@ -2,12 +2,16 @@ package ie.cit.crowdfunding.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 
 /**
  * 
@@ -29,6 +33,12 @@ public class Pledge {
 	 * time limit has expired 
 	 */
 	private boolean permanent;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinTable(name="user_pledges",
+		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
+	private User user;
 		
 	public int getPledgeId() {
 		return id;
@@ -54,6 +64,14 @@ public class Pledge {
 		this.permanent = permanent;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public String toString() {
 		String out = "pledge [id=" + id + ", amount=" + amount + ", permanent=" + permanent 
 				+ "]";
