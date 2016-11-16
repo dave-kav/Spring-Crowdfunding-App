@@ -30,12 +30,13 @@
 						<p th:text="${project.description}"></p>
 						<div class="pull-right">
 							<h4>Target</h4>
-							<p th:text="${project.goalAmt}"></p>
+							<span><i class="fa fa-eur" aria-hidden="true"></i><strong><span th:text="${project.goalAmt}"></span></strong></span>
 						</div>
 						<p></p>
 						<div>
 							<h4>Time Remaining</h4>
-							<p th:text="${project.timeLimit}"></p>
+							<span><span th:text="${project.timeLimit}"></span> days</span>
+							
 						</div>
 					</div>
 					<p>

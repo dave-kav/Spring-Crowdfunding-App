@@ -118,6 +118,14 @@ public class Project {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public float getTotal() {
+		float total = 0;
+		for (Pledge p: pledges) {
+			total += p.getAmount();
+		}
+		return total;
+	}
 
 	@Override
 	public String toString() {

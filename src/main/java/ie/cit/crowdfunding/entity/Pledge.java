@@ -1,6 +1,6 @@
 package ie.cit.crowdfunding.entity;
 
-import java.util.List;
+import java.text.DecimalFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -39,7 +39,7 @@ public class Pledge {
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private User user;
-		
+	
 	public int getPledgeId() {
 		return id;
 	}
