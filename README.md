@@ -50,7 +50,8 @@
 * User dashboard
     * list all users projects
 * "Add project" page
-* Derive and display total pledged for project
+* ~~Derive and display total pledged for project~~
+* Fix display of float values - 2 decimals 
 * Implement security
 * Blind link that only the admin knows – not secure, but hey!) that when loaded checks all projects and closes the ones that have reached their time limit or the funding goal.
 * Hibernate validation
