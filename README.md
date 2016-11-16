@@ -45,13 +45,8 @@
 ***
 
 # To Do #
-* Map pledges to projects, user to projects, pledges to users
-* Improve visuals on projects page
 * Show page
-    * Improve visuals
-    * Display all project info
-    * Add edit button
+   Implement edit button
 * User dashboard
     * list all users projects
-* Add project page
 * Implement security
