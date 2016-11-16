@@ -41,3 +41,18 @@
 * 10% - JUnit classes / TDD test cases
 * 10% - Validation with either Hibernate Validator or Spring Validator
 * 10% - Additional feature(s) (functional or technological), which you must highlight when submitting
+
+***
+
+# To Do #
+* Show page
+   Implement edit button
+* User dashboard
+    * list all users projects
+* "Add project" page
+* Derive and display total pledged for project
+* Implement security
+* Blind link that only the admin knows – not secure, but hey!) that when loaded checks all projects and closes the ones that have reached their time limit or the funding goal.
+* Hibernate validation
+* Junit
+* Internationalization
