@@ -27,21 +27,18 @@ public class ViewController {
 	
 	@RequestMapping(value={"/login"}, method=RequestMethod.GET)
 	public String login() {
-		
 		return "login";
 	}
 	
 	@RequestMapping(value={"/", "/projects"}, method=RequestMethod.GET)
 	public String projects(Model model) {
-//		List<User> users = userRepository.findAll();
-//		model.addAttribute("user_list", users);
 		List<Project> projects = projectRepository.findAll();
 		model.addAttribute("project_list", projects);
 		return "projects";
 	}
 	
-	@RequestMapping(value={"/projects/{id}"}, method=RequestMethod.GET)
-	public String showProject(Model model, @PathVariable(value="id") int id) {
+	@RequestMapping(value={"/projects/{projectid}"}, method=RequestMethod.GET)
+	public String showProject(Model model, @PathVariable(value="projectid") int id) {
 		Project p = projectRepository.findOne(id);
 		model.addAttribute("project", p);
 		return "show";
@@ -53,8 +50,8 @@ public class ViewController {
 		return "adminDashboard";
 	}
 	
-	@RequestMapping(value={"/users/{id}"}, method=RequestMethod.GET)
-	public String userDashboard(Model model, @PathVariable(value="id") int id) {
+	@RequestMapping(value={"/users/{userid}"}, method=RequestMethod.GET)
+	public String userDashboard(Model model, @PathVariable(value="userid") int id) {
 		User u = userRepository.findOne(id);
 		model.addAttribute("user", u);
 		return "userDashboard";
@@ -62,7 +59,6 @@ public class ViewController {
 	
 	@RequestMapping(value={"/addProject"}, method=RequestMethod.GET)
 	public String addProject() {
-		
 		return "addProject";
 	}
 

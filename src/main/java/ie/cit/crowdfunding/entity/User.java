@@ -50,7 +50,7 @@ public class User {
 	@JoinTable(name="user_pledges",
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	public List<Pledge> pledges;
+	private List<Pledge> pledges;
 		
 	public int getUserid() {
 		return id;
