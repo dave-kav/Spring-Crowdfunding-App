@@ -45,6 +45,7 @@
 ***
 
 # To Do #
+* Map pledges to projects, user to projects, pledges to users
 * Improve visuals on projects page
 * Show page
     * Improve visuals
