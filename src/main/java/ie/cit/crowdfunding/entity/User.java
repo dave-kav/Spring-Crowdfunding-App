@@ -50,7 +50,7 @@ public class User {
 	@JoinTable(name="user_pledges",
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	private List<Pledge> pledges;
+	public List<Pledge> pledges;
 		
 	public int getUserid() {
 		return id;
@@ -106,6 +106,22 @@ public class User {
 	
 	public void setPledges(ArrayList<Pledge> pledges) {
 		this.pledges = pledges;
+	}
+	
+	public float getPledgeTotal() {
+		float total = 0;
+		for (Pledge p: pledges) {
+			total += p.getAmount();
+		}
+		return total;
+	}
+	
+	public int getNumProjects() {
+		return projects.size();
+	}
+	
+	public int getNumPledges() {
+		return pledges.size();
 	}
 	
 	@Override

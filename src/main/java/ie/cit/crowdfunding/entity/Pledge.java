@@ -1,7 +1,5 @@
 package ie.cit.crowdfunding.entity;
 
-import java.text.DecimalFormat;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,7 +36,13 @@ public class Pledge {
 	@JoinTable(name="user_pledges",
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	private User user;
+	public User user;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinTable(name="project_pledges",
+		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
+	public Project project;
 	
 	public int getPledgeId() {
 		return id;
@@ -70,6 +74,14 @@ public class Pledge {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public String toString() {

@@ -30,12 +30,22 @@ public class CrowdfundingApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		System.out.println("----------Projects----------");
-		projectTest();
-		System.out.println("----------Pledges----------");
-		pledgeTest();
-		System.out.println("----------Users----------");
-		userTest();
+//		System.out.println("----------Projects----------");
+//		projectTest();
+//		System.out.println("----------Pledges----------");
+//		pledgeTest();
+//		System.out.println("----------Users----------");
+//		userTest();
+		System.out.println("----------test----------");
+		User u = userRepository.findOne(1);
+		for (Project p: u.getProjects()) {
+			System.out.println(p.getName());
+		}
+		System.out.println(u.getNumProjects());
+		for (Pledge p: u.getPledges()) {
+			System.out.println(p.getAmount());
+		}
+		System.out.println(u.getNumPledges());
 	}
 	
 	public void userTest() {

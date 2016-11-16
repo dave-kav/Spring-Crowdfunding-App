@@ -53,9 +53,10 @@ public class ViewController {
 		return "adminDashboard";
 	}
 	
-	@RequestMapping(value={"/userDashboard"}, method=RequestMethod.GET)
-	public String userDashboard() {
-		
+	@RequestMapping(value={"/users/{id}"}, method=RequestMethod.GET)
+	public String userDashboard(Model model, @PathVariable(value="id") int id) {
+		User u = userRepository.findOne(id);
+		model.addAttribute("user", u);
 		return "userDashboard";
 	}
 	

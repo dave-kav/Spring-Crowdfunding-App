@@ -47,13 +47,13 @@ public class Project {
 	@JoinTable(name="project_pledges",
 		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	private List<Pledge> pledges;
+	public List<Pledge> pledges;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@JoinTable(name="user_projects",
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="project_id", referencedColumnName="id")})
-	private User user;
+	public User user;
 	
 	public int getId() {
 		return id;
