@@ -41,3 +41,16 @@
 * 10% - JUnit classes / TDD test cases
 * 10% - Validation with either Hibernate Validator or Spring Validator
 * 10% - Additional feature(s) (functional or technological), which you must highlight when submitting
+
+***
+
+# To Do #
+* Improve visuals on projects page
+* Show page
+    * Improve visuals
+    * Display all project info
+    * Add edit button
+* User dashboard
+    * list all users projects
+* Add project page
+* Implement security
