@@ -49,4 +49,5 @@
    Implement edit button
 * User dashboard
     * list all users projects
+* "Add project" page
 * Implement security
