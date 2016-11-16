@@ -38,11 +38,8 @@ public class Project {
 	 * int value representing number of days remaining,
 	 * easier than messing around with dates  
 	 */
-	private int timeLimit; 
+	private int timeLimit;
 
-	@ManyToMany(mappedBy="projects")
-	private List<User> users;
-	
 	// list of pledges made to this project
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -99,6 +96,14 @@ public class Project {
 		this.timeLimit = timeLimit;
 	}
 	
+	public List<Pledge> getPledges() {
+		return pledges;
+	}
+
+	public void setPledges(List<Pledge> pledges) {
+		this.pledges = pledges;
+	}
+
 	@Override
 	public String toString() {
 		String out = "project [id=" + id + ", name=" + name + ", description=" + description

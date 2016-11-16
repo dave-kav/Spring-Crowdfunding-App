@@ -25,13 +25,13 @@ public class ViewController {
 	@Autowired
 	ProjectRepository projectRepository;
 	
-	@RequestMapping(value={"/", "/login"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/login"}, method=RequestMethod.GET)
 	public String login() {
 		
 		return "login";
 	}
 	
-	@RequestMapping(value={"/projects"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/", "/projects"}, method=RequestMethod.GET)
 	public String projects(Model model) {
 //		List<User> users = userRepository.findAll();
 //		model.addAttribute("user_list", users);

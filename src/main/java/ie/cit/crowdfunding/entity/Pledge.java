@@ -29,10 +29,7 @@ public class Pledge {
 	 * time limit has expired 
 	 */
 	private boolean permanent;
-	
-	@ManyToMany(mappedBy="pledges")
-	private List<User> users;
-	
+		
 	public int getPledgeId() {
 		return id;
 	}

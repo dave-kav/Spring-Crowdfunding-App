@@ -5,7 +5,7 @@
 <head>
 	<title>KickFundr</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
-	<link rel="stylesheet" href="css/style2.css"></link>
+	<link rel="stylesheet" href="/css/style.css"></link>
 	<script src="https://use.fontawesome.com/4709fbc9b6.js"></script>
 </head>
 
@@ -29,8 +29,10 @@
 				</div>
 				<div class="container_float">
 					<p th:text="${project.description}"></p>
-					<p th:text="${project.timeLimit}"></p>
+					<h4>Target</h4>
 					<p th:text="${project.goalAmt}"></p>
+					<h4>Time Remaining</h4>
+					<p th:text="${project.timeLimit}"></p>
 				</div>
 				<p>
                     <a th:href="@{/projects/} + ${project.id}" class="btn btn-primary">More Info</a>
