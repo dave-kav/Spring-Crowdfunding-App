@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>KickFundr</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="css/style2.css"></link>
+	<script src="https://use.fontawesome.com/4709fbc9b6.js"></script>
+</head>
+
+<body>
+	<!-- Insert Navbar -->
+	<div th:replace="fragments/header :: header">&nbsp;</div>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1><i class="fa fa-money" aria-hidden="true"></i> KickFundr</h1>
+			<p>Crowd fund your to make your vision a reality!</p>
+		</div>	
+	
+		<div class="row" style="display:flex: flex-wrap: wrap;">	
+			<div class="col-lg-4 col-md-3 col-sm-6" th:each="project : ${project_list}">
+				<div class="thumbnail">
+					<div class="caption">
+	                    <h3 th:text="${project.name}"></h3>
+	                </div>
+					<a th:href="@{/projects/} + ${project.id}"><img th:src="${project.image}"></img></a>
+				</div>
+				<div class="container_float">
+					<p th:text="${project.description}"></p>
+					<p th:text="${project.timeLimit}"></p>
+					<p th:text="${project.goalAmt}"></p>
+				</div>
+				<p>
+                    <a th:href="@{/projects/} + ${project.id}" class="btn btn-primary">More Info</a>
+                </p>
+			</div>
+		</div>
+	</div>
+	
+    
+
+</body>
+</html>

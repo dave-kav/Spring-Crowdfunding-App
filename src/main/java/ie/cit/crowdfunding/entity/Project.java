@@ -51,12 +51,12 @@ public class Project {
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private List<Pledge> pledges;
 	
-	public int getProjectId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setProjectId(int projectId) {
-		this.id = projectId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -75,12 +75,12 @@ public class Project {
 		this.description = description;
 	}
 	
-	public String getImgUrl() {
+	public String getImage() {
 		return image;
 	}
 	
-	public void setImgUrl(String imgUrl) {
-		this.image = imgUrl;
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	public float getGoalAmt() {

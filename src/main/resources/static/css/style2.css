@@ -1,3 +1,26 @@
 body {
-	margin-top: 2.5em
+	padding-top: 90px;
+}
+
+.jumbotron {
+	color: #2c3e50;
+	background: #ecf0f1;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-inverse .navbar-brand {
+	color: white;
+}
+.thumbnail img {
+    width: 100%;
+}
+
+.thumbnail {
+    padding: 0;
+}
+.conainer_float {
+	float: right;
 }

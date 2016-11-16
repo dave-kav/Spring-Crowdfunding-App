@@ -214,6 +214,13 @@ form button:hover {
   -webkit-animation-delay: 11s;
           animation-delay: 11s;
 }
+.navbar-inverse .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-inverse .navbar-brand {
+	color: white;
+}
 @-webkit-keyframes square {
   0% {
     -webkit-transform: translateY(0);

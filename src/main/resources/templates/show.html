@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>KickFundr</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="css/style2.css"></link>
+	<script src="https://use.fontawesome.com/4709fbc9b6.js"></script>
+</head>
+
+<body>
+	<!-- Insert Navbar -->
+	<div th:replace="fragments/header :: header">&nbsp;</div>
+
+	<div class="thumbnail">
+		<div class="caption">
+                  <h3 th:text="${project.name}"></h3>
+              </div>
+		<a th:href="@{/projects/} + ${project.id}"><img th:src="${project.image}"></img></a>
+	</div>
+	<div class="container_float">
+		<p th:text="${project.description}"></p>
+		<p th:text="${project.timeLimit}"></p>
+		<p th:text="${project.goalAmt}"></p>
+	</div>
+</body>
+</html>
