@@ -42,9 +42,9 @@ body :-ms-input-placeholder {
   font-weight: 300;
 }
 .wrapper {
-  background: #50a3a2;
-  background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-  background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+  background:url(https://static.pexels.com/photos/31257/pexels-photo.jpg);
+  background-size: cover;
+  background-position: center;
   position: absolute;
   left: 0;
   width: 100%;

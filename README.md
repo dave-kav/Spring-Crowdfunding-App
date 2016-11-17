@@ -45,14 +45,20 @@
 ***
 
 # To Do #
-* Show page
-   Implement edit button
-* User dashboard
-    * list all users projects
-* "Add project" page
+* ~~Show page~~
+   ~~Implement edit button~~
+* Edit page
+    * ~~implement edit functionality~~
+    * bug, reloading when return to projects page
+* ~~User dashboard~~
+    * list all users projects & stakes - bug listing only one
+* ~~"Add project" page~~
+    * ~~implement save functionality~~
 * ~~Derive and display total pledged for project~~
 * Fix display of float values - 2 decimals 
 * Implement security
+    * show/hide as necessary components if user logged in
+    * insert user name to projects/pledges
 * Blind link that only the admin knows – not secure, but hey!) that when loaded checks all projects and closes the ones that have reached their time limit or the funding goal.
 * Hibernate validation
 * Junit
