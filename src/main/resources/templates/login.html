@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <meta charset="UTF-8"></meta>
   <title>KickFundr - Login</title>
@@ -14,12 +15,18 @@
 	<div class="wrapper">
 	<div class="container1">
 		<h1>Welcome</h1>
-		<form class="form">
-			<input type="text" placeholder="Username"></input>
-			<input type="password" placeholder="Password"></input>
-			<button type="submit" id="login-button">Login</button>
+		<form th:action="@{/login}" method="post">
+			<input type="text" name="username" placeholder="Username"></input>
+			<input type="password" name="password" placeholder="Password"></input>
+			<button type="submit" id="login">Login</button>
 		</form>
 	</div>
+	<div th:if="${param.error}">
+            Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+            You have been logged out.
+    </div>
 	<ul class="bg-bubbles">
 		<li></li>
 		<li></li>
