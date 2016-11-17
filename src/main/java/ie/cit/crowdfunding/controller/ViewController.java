@@ -30,7 +30,12 @@ public class ViewController {
 		return "login";
 	}
 	
-	@RequestMapping(value={"/", "/projects"}, method=RequestMethod.GET)
+	@RequestMapping(value={"/", "/home"}, method=RequestMethod.GET)
+	public String landing() {
+		return "landing";
+	}
+	
+	@RequestMapping(value={"/projects"}, method=RequestMethod.GET)
 	public String projects(Model model) {
 		List<Project> projects = projectRepository.findAll();
 		model.addAttribute("project_list", projects);
@@ -42,6 +47,28 @@ public class ViewController {
 		Project p = projectRepository.findOne(id);
 		model.addAttribute("project", p);
 		return "show";
+	}
+	
+	@RequestMapping(value={"/projects/{projectid}"}, method=RequestMethod.PUT)
+	public String updateProject(Model model, @PathVariable(value="projectid") int id) {
+		Project p = projectRepository.findOne(id);
+		//TODO get description and update & save
+		model.addAttribute("project", p);
+		return "show";
+	}
+	
+	@RequestMapping(value={"/projects/{projectid}/edit"}, method=RequestMethod.GET)
+	public String editProject(Model model, @PathVariable(value="projectid") int id) {
+		Project p = projectRepository.findOne(id);
+		//TODO get description and update & save
+		model.addAttribute("project", p);
+		return "editProject";
+	}
+	
+	@RequestMapping(value={"/projects"}, method=RequestMethod.POST)
+	public String addProject() {
+		//implement functionality to save added project
+		return "projects";
 	}
 	
 	@RequestMapping(value={"/adminDashboard"}, method=RequestMethod.GET)
@@ -57,9 +84,16 @@ public class ViewController {
 		return "userDashboard";
 	}
 	
-	@RequestMapping(value={"/addProject"}, method=RequestMethod.GET)
-	public String addProject() {
+	@RequestMapping(value={"/projects/new"}, method=RequestMethod.GET)
+	public String newProject() {
 		return "addProject";
+	}
+	
+	@RequestMapping(value={"/projects/{projectid}/pledges/new"}, method=RequestMethod.GET)
+	public String newPledge(Model model, @PathVariable(value="projectid") int id) {
+		Project p = projectRepository.findOne(id);
+		model.addAttribute("project", p);
+		return "addPledge";
 	}
 
 }
