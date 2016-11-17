@@ -1,7 +1,5 @@
 package ie.cit.crowdfunding.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import ie.cit.crowdfunding.entity.Pledge;
 import ie.cit.crowdfunding.entity.Project;
 import ie.cit.crowdfunding.entity.User;
 import ie.cit.crowdfunding.repository.PledgeRepository;
@@ -37,7 +36,7 @@ public class ViewController {
 	
 	@RequestMapping(value={"/projects"}, method=RequestMethod.GET)
 	public String projects(Model model) {
-		List<Project> projects = projectRepository.findAll();
+		Iterable<Project> projects = projectRepository.findAll();
 		model.addAttribute("project_list", projects);
 		return "projects";
 	}
@@ -49,10 +48,11 @@ public class ViewController {
 		return "show";
 	}
 	
-	@RequestMapping(value={"/projects/{projectid}"}, method=RequestMethod.PUT)
-	public String updateProject(Model model, @PathVariable(value="projectid") int id) {
-		Project p = projectRepository.findOne(id);
+	@RequestMapping(value={"/projects/{projectid}"}, method=RequestMethod.POST)
+	public String updateProject(Model model, Project project, @PathVariable(value="projectid") int id) {
 		//TODO get description and update & save
+		Project p = projectRepository.findOne(id);
+		p.setDescription(project.getDescription());
 		model.addAttribute("project", p);
 		return "show";
 	}
@@ -66,8 +66,14 @@ public class ViewController {
 	}
 	
 	@RequestMapping(value={"/projects"}, method=RequestMethod.POST)
-	public String addProject() {
-		//implement functionality to save added project
+	public String addProject(Model model, Project project) {
+		//TODO insert user dynamically depending on logged in
+		project.setUser(userRepository.getOne(1));
+		projectRepository.save(project);
+
+		//add all projects to model
+		Iterable<Project> projects = projectRepository.findAll();
+		model.addAttribute("project_list", projects);
 		return "projects";
 	}
 	
@@ -85,7 +91,8 @@ public class ViewController {
 	}
 	
 	@RequestMapping(value={"/projects/new"}, method=RequestMethod.GET)
-	public String newProject() {
+	public String newProject(Model model) {
+		model.addAttribute("project", new Project());
 		return "addProject";
 	}
 	
@@ -93,7 +100,19 @@ public class ViewController {
 	public String newPledge(Model model, @PathVariable(value="projectid") int id) {
 		Project p = projectRepository.findOne(id);
 		model.addAttribute("project", p);
+		model.addAttribute("pledge", new Pledge());
 		return "addPledge";
 	}
-
+	
+	@RequestMapping(value={"/projects/{projectid}/pledges/"}, method=RequestMethod.POST)
+	public String savePledge(Model model, @PathVariable(value="projectid") int id, Pledge pledge) {
+		pledge.setPermanent(false);
+		//TODO insert user dynamically depending on logged in
+		pledge.setUser(userRepository.getOne(1));
+		pledgeRepository.save(pledge);
+		
+		Project p = projectRepository.findOne(id);
+		model.addAttribute("project", p);
+		return "show";
+	}
 }

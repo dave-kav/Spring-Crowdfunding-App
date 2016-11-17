@@ -17,9 +17,9 @@
 	    <div class="row">
 	        <h1 style="text-align: center;"><span>Pledge to <span th:text="${project.name}"></span></span></h1>
 	        <div style="width: 30%; margin: 35px auto;">
-	            <form action="/projects" method="POST">
+	            <form action="#" th:action="@{/projects/} + ${project.id} + @{/pledges/}" th:object="${pledge}" method="post">
 	                <div class="form-group">
-	                    <input class="form-control" type="text" name="amount" placeholder="name"></input>
+	                    <input class="form-control" type="text" name="amount" placeholder="name" th:field="*{amount}"></input>
 	                </div>
 	                <div class="form-group">
 	                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
@@ -29,7 +29,7 @@
 	        </div>
 	    </div>
 	</div>
-
-
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html> 

@@ -17,21 +17,21 @@
 	    <div class="row">
 	        <h1 style="text-align: center;">Create a new Project</h1>
 	        <div style="width: 30%; margin: 35px auto;">
-	            <form action="/projects" method="POST">
+	            <form action="#" th:action="@{/projects}" th:object="${project}" method="post">
 	                <div class="form-group">
-	                    <input class="form-control" type="text" name="name" placeholder="name"></input>
+	                    <input class="form-control" type="text" name="name" placeholder="name" th:field="*{name}"></input>
 	                </div>
 	                <div class="form-group">
-	                    <input class="form-control" type="text" name="image" placeholder="image url"></input>
+	                    <input class="form-control" type="text" name="image" placeholder="image url" th:field="*{image}"></input>
 	                </div>
 	                <div class="form-group">
-	                    <input class="form-control" type="text" name="description" placeholder="description"></input>
+	                    <input class="form-control" type="text" name="description" placeholder="description" th:field="*{description}"></input>
 	                </div>
 	                <div class="form-group">
-	                    <input class="form-control" type="text" name="goal" placeholder="goal amount"></input>
+	                    <input class="form-control" type="text" name="goal" placeholder="goal amount" th:field="*{goalAmt}"></input>
 	                </div>
 	                <div class="form-group">
-	                    <input class="form-control" type="text" name="time_limit" placeholder="time limit"></input>
+	                    <input class="form-control" type="text" name="time_limit" placeholder="time limit" th:field="*{timeLimit}"></input>
 	                </div>
 	                <div class="form-group">
 	                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
@@ -41,7 +41,7 @@
 	        </div>
 	    </div>
 	</div>
-
-
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>	
 </body>
 </html>
