@@ -45,11 +45,14 @@
 ***
 
 # To Do #
-* Show page
-   Implement edit button
-* User dashboard
-    * list all users projects
-* "Add project" page
+* ~~Show page~~
+   ~~Implement edit button~~
+* Edit page
+    * implement edit functionality
+* ~~User dashboard~~
+    * list all users projects & stakes - big listing only one
+* ~~"Add project" page~~
+    * implement save functionality
 * ~~Derive and display total pledged for project~~
 * Fix display of float values - 2 decimals 
 * Implement security
