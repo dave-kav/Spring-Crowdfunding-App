@@ -17,9 +17,11 @@
 	    <div class="row">
 	        <h1 style="text-align: center;"><span>Edit "</span><span th:text="${project.name}"></span>"</h1>
 	        <div style="width: 30%; margin: 35px auto;">
-	            <form action="@{/projects/} + ${project.id}" method="POST">
+	            <form action="#" th:action="@{/projects/} + ${project.id}" th:object="${project}" method="POST">
 	                <div class="form-group">
-	                    <textarea class="form-control" rows="5" th:name="${project.description}" th:text="${project.description}"></textarea>
+	                    <textarea class="form-control" rows="5" th:name="${project.description}" 
+	                    		th:text="${project.description}" th:field="*{description}">
+                   		</textarea>
 	                </div>
 	                <div class="form-group">
 	                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
