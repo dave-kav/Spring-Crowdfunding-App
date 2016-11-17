@@ -103,7 +103,7 @@ form input:hover {
 form input:focus {
   background-color: white;
   width: 300px;
-  color: #53e3a6;
+  color: #000000;
 }
 form button {
   -webkit-appearance: none;
@@ -113,7 +113,7 @@ form button {
   background-color: white;
   border: 0;
   padding: 10px 15px;
-  color: #53e3a6;
+  color: #000000;
   border-radius: 3px;
   width: 250px;
   cursor: pointer;
