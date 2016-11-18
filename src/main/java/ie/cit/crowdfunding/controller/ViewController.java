@@ -106,12 +106,14 @@ public class ViewController {
 	
 	@RequestMapping(value={"/projects/{projectid}/pledges/"}, method=RequestMethod.POST)
 	public String savePledge(Model model, @PathVariable(value="projectid") int id, Pledge pledge) {
+		Project p = projectRepository.findOne(id);
+		
 		pledge.setPermanent(false);
 		//TODO insert user dynamically depending on logged in
 		pledge.setUser(userRepository.getOne(1));
+		pledge.setProject(p);
 		pledgeRepository.save(pledge);
 		
-		Project p = projectRepository.findOne(id);
 		model.addAttribute("project", p);
 		return "show";
 	}

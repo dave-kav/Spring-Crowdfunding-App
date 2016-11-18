@@ -14,9 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 /**
  * 
  * @author Dave Kavanagh	
@@ -43,17 +40,13 @@ public class Project {
 
 	// list of pledges made to this project
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(name="project_pledges",
 		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private List<Pledge> pledges;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinTable(name="user_projects",
-		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-		inverseJoinColumns={@JoinColumn(name="project_id", referencedColumnName="id")})
-	private User user;
+	@ManyToMany(mappedBy="projects")
+	private List<User> users;
 	
 	public int getId() {
 		return id;
@@ -112,11 +105,11 @@ public class Project {
 	}
 
 	public User getUser() {
-		return user;
+		return users.get(0);
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		users.add(user);
 	}
 	
 	public float getTotal() {

@@ -1,15 +1,13 @@
 package ie.cit.crowdfunding.entity;
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 /**
  * 
@@ -32,17 +30,11 @@ public class Pledge {
 	 */
 	private boolean permanent;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinTable(name="user_pledges",
-		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	public User user;
+	@ManyToMany(mappedBy="pledges")
+	private List<User> users;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinTable(name="project_pledges",
-		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
-		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	public Project project;
+	@ManyToMany(mappedBy="pledges")
+	private List<Project> projects;
 	
 	public int getPledgeId() {
 		return id;
@@ -69,19 +61,19 @@ public class Pledge {
 	}
 	
 	public User getUser() {
-		return user;
+		return users.get(0);
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.users.add(user);
 	}
 
 	public Project getProject() {
-		return project;
+		return this.projects.get(0);
 	}
 
 	public void setProject(Project project) {
-		this.project = project;
+		this.projects.add(project);
 	}
 
 	public String toString() {

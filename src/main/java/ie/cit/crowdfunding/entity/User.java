@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -37,7 +38,7 @@ public class User {
 	private float creditLimit;
 	
 	// list of projects that the user owns
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(name="user_projects",
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
@@ -45,7 +46,7 @@ public class User {
 	public List<Project> projects;
 	
 	// list of pledges made by the user
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(name="user_pledges",
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
