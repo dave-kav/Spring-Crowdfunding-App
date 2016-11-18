@@ -53,7 +53,7 @@ public class ViewController {
 		//TODO get description and update & save
 		Project p = projectRepository.findOne(id);
 		p.setDescription(project.getDescription());
-		projectRepository.save(p);
+		p = projectRepository.save(p);
 		model.addAttribute("project", p);
 		return "show";
 	}
@@ -61,7 +61,6 @@ public class ViewController {
 	@RequestMapping(value={"/projects/{projectid}/edit"}, method=RequestMethod.GET)
 	public String editProject(Model model, @PathVariable(value="projectid") int id) {
 		Project p = projectRepository.findOne(id);
-		//TODO get description and update & save
 		model.addAttribute("project", p);
 		return "editProject";
 	}
@@ -70,7 +69,7 @@ public class ViewController {
 	public String addProject(Model model, Project project) {
 		//TODO insert user dynamically depending on logged in
 		project.setUser(userRepository.getOne(1));
-		projectRepository.save(project);
+		project = projectRepository.save(project);
 
 		//add all projects to model
 		Iterable<Project> projects = projectRepository.findAll();
@@ -113,10 +112,10 @@ public class ViewController {
 		//TODO insert user dynamically depending on logged in
 		pledge.setUser(userRepository.getOne(1));
 		pledge.setProject(p);
-		pledgeRepository.save(pledge);
+		pledge = pledgeRepository.save(pledge);
 		
 		p.getPledges().add(pledge);
-		projectRepository.save(p);
+		p = projectRepository.save(p);
 		
 		model.addAttribute("project", p);
 		return "show";

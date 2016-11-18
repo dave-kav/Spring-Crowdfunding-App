@@ -70,6 +70,34 @@ public class Pledge {
 		users.add(user);
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public boolean isPermanent() {
+		return permanent;
+	}
+
 	public Project getProject() {
 		return projects.get(0);
 	}

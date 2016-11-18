@@ -52,6 +52,22 @@ public class User {
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private List<Pledge> pledges;
 		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public void setPledges(List<Pledge> pledges) {
+		this.pledges = pledges;
+	}
+
 	public int getUserid() {
 		return id;
 	}
