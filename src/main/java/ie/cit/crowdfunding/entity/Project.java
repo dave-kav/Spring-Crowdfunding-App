@@ -1,5 +1,6 @@
 package ie.cit.crowdfunding.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -43,9 +43,9 @@ public class Project {
 	@JoinTable(name="project_pledges",
 		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	private List<Pledge> pledges;
+	private List<Pledge> pledges = new ArrayList<Pledge>();
 	
-	@ManyToMany(mappedBy="projects")
+	@ManyToMany(mappedBy="projects", cascade = {CascadeType.ALL})
 	private List<User> users;
 	
 	public int getId() {

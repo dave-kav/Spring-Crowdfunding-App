@@ -2,10 +2,12 @@ package ie.cit.crowdfunding.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -30,11 +32,11 @@ public class Pledge {
 	 */
 	private boolean permanent;
 	
-	@ManyToMany(mappedBy="pledges")
+	@ManyToMany(mappedBy="pledges", cascade = {CascadeType.ALL})
 	private List<User> users;
 	
-	@ManyToMany(mappedBy="pledges")
-	private List<Project> projects;
+	@ManyToMany(mappedBy="pledges", cascade = {CascadeType.ALL})
+	private List<Project> projects; 
 	
 	public int getPledgeId() {
 		return id;
@@ -65,15 +67,15 @@ public class Pledge {
 	}
 
 	public void setUser(User user) {
-		this.users.add(user);
+		users.add(user);
 	}
 
 	public Project getProject() {
-		return this.projects.get(0);
+		return projects.get(0);
 	}
 
 	public void setProject(Project project) {
-		this.projects.add(project);
+		projects.add(project);
 	}
 
 	public String toString() {

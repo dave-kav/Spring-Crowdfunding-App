@@ -53,6 +53,7 @@ public class ViewController {
 		//TODO get description and update & save
 		Project p = projectRepository.findOne(id);
 		p.setDescription(project.getDescription());
+		projectRepository.save(p);
 		model.addAttribute("project", p);
 		return "show";
 	}
@@ -113,6 +114,9 @@ public class ViewController {
 		pledge.setUser(userRepository.getOne(1));
 		pledge.setProject(p);
 		pledgeRepository.save(pledge);
+		
+		p.getPledges().add(pledge);
+		projectRepository.save(p);
 		
 		model.addAttribute("project", p);
 		return "show";
