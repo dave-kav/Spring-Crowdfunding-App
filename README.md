@@ -50,10 +50,12 @@
 * Edit page
     * ~~implement edit functionality~~
     * bug, reloading when return to projects page
+    * can't save
 * ~~User dashboard~~
-    * list all users projects & stakes - bug listing only one
+    * ~~list all users projects & stakes - bug listing only one~~
 * ~~"Add project" page~~
     * ~~implement save functionality~~
+    * bug on saving, null pointer adding user/pledges to projects etc.
 * ~~Derive and display total pledged for project~~
 * Fix display of float values - 2 decimals 
 * Implement security
