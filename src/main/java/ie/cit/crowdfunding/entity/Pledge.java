@@ -1,5 +1,6 @@
 package ie.cit.crowdfunding.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,6 +38,11 @@ public class Pledge {
 	
 	@ManyToMany(mappedBy="pledges", cascade = {CascadeType.ALL})
 	private List<Project> projects; 
+	
+	public Pledge() {
+		users = new ArrayList<>();
+		projects = new ArrayList<>();
+	}
 	
 	public int getPledgeId() {
 		return id;

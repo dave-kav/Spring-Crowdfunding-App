@@ -68,7 +68,7 @@ public class ViewController {
 	@RequestMapping(value={"/projects"}, method=RequestMethod.POST)
 	public String addProject(Model model, Project project) {
 		//TODO insert user dynamically depending on logged in
-		project.setUser(userRepository.getOne(1));
+		project.setUser(userRepository.findOne(1));
 		project = projectRepository.save(project);
 
 		//add all projects to model
@@ -110,7 +110,7 @@ public class ViewController {
 		
 		pledge.setPermanent(false);
 		//TODO insert user dynamically depending on logged in
-		pledge.setUser(userRepository.getOne(1));
+		pledge.setUser(userRepository.findOne(1));
 		pledge.setProject(p);
 		pledge = pledgeRepository.save(pledge);
 		

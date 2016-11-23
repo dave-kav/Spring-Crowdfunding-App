@@ -35,6 +35,7 @@ public class User {
 	private String userName;
 	private String password;
 	private float creditLimit;
+	private String role;
 	
 	// list of projects that the user owns
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
@@ -108,6 +109,14 @@ public class User {
 		this.creditLimit = creditLimit;
 	}
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public List<Project> getProjects() {
 		return projects;
 	}
