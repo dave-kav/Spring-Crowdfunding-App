@@ -13,6 +13,7 @@ import ie.cit.crowdfunding.entity.User;
 import ie.cit.crowdfunding.repository.PledgeRepository;
 import ie.cit.crowdfunding.repository.ProjectRepository;
 import ie.cit.crowdfunding.repository.UserRepository;
+import ie.cit.crowdfunding.service.UpdateService;
 
 @Controller
 public class ViewController {
@@ -23,6 +24,8 @@ public class ViewController {
 	PledgeRepository pledgeRepository;
 	@Autowired
 	ProjectRepository projectRepository;
+	@Autowired
+	UpdateService updateService;
 	
 	@RequestMapping(value={"/login"}, method=RequestMethod.GET)
 	public String login() {
@@ -78,9 +81,12 @@ public class ViewController {
 	}
 	
 	@RequestMapping(value={"/adminDashboard"}, method=RequestMethod.GET)
-	public String adminDashboard() {
+	public String adminDashboard(Model model) {
+		updateService.updateProjects();
 		
-		return "adminDashboard";
+		Iterable<Project> projects = projectRepository.findAll();
+		model.addAttribute("project_list", projects);
+		return "projects";
 	}
 	
 	@RequestMapping(value={"/users/{userid}"}, method=RequestMethod.GET)

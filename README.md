@@ -47,21 +47,23 @@
 # To Do #
 * ~~Show page~~
    ~~Implement edit button~~
-* Edit page
+    * Add status - open/closed - hide pledge button if closed
+    * Add option to cancel pledge if project still open 
+* ~~Edit page~~
     * ~~implement edit functionality~~
-    * bug, reloading when return to projects page
-    * can't save
+    * ~~bug, reloading when return to projects page~~
+    * ~~can't save~~
 * ~~User dashboard~~
     * ~~list all users projects & stakes - bug listing only one~~
 * ~~"Add project" page~~
     * ~~implement save functionality~~
-    * bug on saving, null pointer adding user/pledges to projects etc.
+    * ~~bug on saving, null pointer adding user/pledges to projects etc.~~
 * ~~Derive and display total pledged for project~~
 * Fix display of float values - 2 decimals 
 * Implement security
     * show/hide as necessary components if user logged in
     * insert user name to projects/pledges
-* Blind link that only the admin knows – not secure, but hey!) that when loaded checks all projects and closes the ones that have reached their time limit or the funding goal.
+* ~~Blind link that only the admin knows – not secure, but hey!) that when loaded checks all projects and closes the ones that have reached their time limit or the funding goal.~~
 * Hibernate validation
 * Junit
 * Internationalization

@@ -37,6 +37,7 @@ public class Project {
 	 * easier than messing around with dates  
 	 */
 	private int timeLimit;
+	private boolean active;
 
 	// list of pledges made to this project
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
@@ -126,6 +127,14 @@ public class Project {
 			total += p.getAmount();
 		}
 		return total;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	@Override
