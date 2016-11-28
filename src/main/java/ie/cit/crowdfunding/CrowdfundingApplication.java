@@ -1,6 +1,9 @@
 package ie.cit.crowdfunding;
 
+import java.sql.DatabaseMetaData;
 import java.util.List;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +26,8 @@ public class CrowdfundingApplication  implements CommandLineRunner {
 	PledgeRepository pledgeRepository;
 	@Autowired
 	ProjectRepository projectRepository;
+	@Autowired
+	DataSource dataSource;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrowdfundingApplication.class, args);
@@ -46,6 +51,8 @@ public class CrowdfundingApplication  implements CommandLineRunner {
 //			System.out.println(p.getAmount());
 //		}
 //		System.out.println(u.getNumPledges());
+		DatabaseMetaData s = dataSource.getConnection().getMetaData();
+		System.out.println(s.toString());
 	}
 	
 	public void userTest() {

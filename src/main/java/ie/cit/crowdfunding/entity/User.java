@@ -25,18 +25,34 @@ import org.hibernate.annotations.FetchMode;
  *
  */
 @Entity
-@Table(name="users")
+@Table(name="Users")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String fullName;
-	private String userName;
+	private String username;
 	private String password;
 	private float creditLimit;
-	private String role;
+	private boolean enabled;
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	// list of projects that the user owns
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -85,14 +101,6 @@ public class User {
 		this.fullName = fullName;
 	}
 	
-	public String getUserName() {
-		return userName;
-	}
-	
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
 	public String getPassword() {
 		return password;
 	}
@@ -109,14 +117,6 @@ public class User {
 		this.creditLimit = creditLimit;
 	}
 	
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public List<Project> getProjects() {
 		return projects;
 	}
@@ -151,7 +151,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		String out = "User [id=" + id + ", fullname=" + fullName + ", username=" + userName
+		String out = "User [id=" + id + ", fullname=" + fullName + ", username=" + username
 				+ ", creditlimit=" + creditLimit + ", projects =[";
 		for (Project p: projects) {
 			out += p.toString() + ", ";

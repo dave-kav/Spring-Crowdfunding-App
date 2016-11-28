@@ -1,10 +1,10 @@
-INSERT INTO Users (id, full_name, user_name, password, credit_limit, role) VALUES (1, 'Dave Kavanagh', 'davykav87', 123456789, 2000, 'User');
-INSERT INTO Users (id, full_name, user_name, password, credit_limit, role) VALUES (2, 'Thomas O Halloran', 'tamoh1', 147258369, 3000, 'User');
-INSERT INTO Users (id, full_name, user_name, password, credit_limit, role) VALUES (3, 'Darren Smith', 'foxylocks', 987654321, 5500, 'User');
+INSERT INTO Users (id, full_name, username, password, credit_limit, enabled) VALUES (1, 'Dave Kavanagh', 'davykav87', 123456789, 2000, 1);
+INSERT INTO Users (id, full_name, username, password, credit_limit, enabled) VALUES (2, 'Thomas O Halloran', 'tamoh1', 147258369, 3000, 1);
+INSERT INTO Users (id, full_name, username, password, credit_limit, enabled) VALUES (3, 'Darren Smith', 'admin', 'pass', 5500, 1);
 
-INSERT INTO User_Roles (user_name, password, role) VALUES ('davykav87', 123456789, 'User')
-INSERT INTO User_Roles (user_name, password, role) VALUES ('tamoh1', 147258369, 'User')
-INSERT INTO User_Roles (user_name, password, role) VALUES ('foxylocks', 987654321, 'User')
+INSERT INTO Authorities (username, authority) VALUES ('davykav87', 'USER')
+INSERT INTO Authorities (username, authority) VALUES ('tamoh1', 'USER')
+INSERT INTO Authorities (username, authority) VALUES ('admin', 'USER')
 
 INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit, active) VALUES (1, 'Trickstick', 'The Trickstick is a unique, high res, handheld LED POV display. Wave it and a colorful, detailed image appears in thin air – Magic!', 'https://ksr-ugc.imgix.net/assets/014/337/274/29ae0199e1917fb66c0909bfdb05e79a_original.jpg?w=680&fit=max&v=1477958772&auto=format&q=92&s=2b4d83c488c1f133514b1a4191287c2f', 98000, 30, true);
 INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit, active) VALUES (2, 'Dialect: A Game about Language and How it Dies', 'Build a language, build a world. Who were the Isolation, and how were they lost? In this game, your language is the story.', 'https://ksr-ugc.imgix.net/assets/014/233/249/f0daaca7912d700d58bd3e060588e987_original.png?w=680&fit=max&v=1477272636&auto=format&lossless=true&s=e252984bb5348f17783ef41b0bf1a7e5', 3000, 15, true);
