@@ -44,10 +44,15 @@ public class Project {
 	@JoinTable(name="project_pledges",
 		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
-	private List<Pledge> pledges = new ArrayList<Pledge>();
+	private List<Pledge> pledges;
 	
 	@ManyToMany(mappedBy="projects", cascade = {CascadeType.ALL})
 	private List<User> users;
+	
+	public Project () {
+		users = new ArrayList<User>();
+		pledges = new ArrayList<Pledge>();
+	}
 	
 	public int getId() {
 		return id;

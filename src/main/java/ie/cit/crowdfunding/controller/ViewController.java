@@ -73,6 +73,7 @@ public class ViewController {
 		//TODO insert user dynamically depending on logged in
 		project.setUser(userRepository.findOne(1));
 		project = projectRepository.save(project);
+		userRepository.addProjectToUser(userRepository.findOne(1).getId(), project.getId());
 
 		//add all projects to model
 		Iterable<Project> projects = projectRepository.findAll();

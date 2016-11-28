@@ -70,6 +70,11 @@ public class User {
 		joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private List<Pledge> pledges;
+	
+	public User () {
+		projects = new ArrayList<Project>();
+		pledges = new ArrayList<Pledge>();
+	}
 		
 	public int getId() {
 		return id;
