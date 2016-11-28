@@ -17,6 +17,12 @@ import javax.persistence.Table;
 @Table(name="Authorities")
 public class Authority {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	private String username;
+	private String authority;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -29,9 +35,4 @@ public class Authority {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String username;
-	private String authority;
-	
 }
