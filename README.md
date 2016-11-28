@@ -49,6 +49,7 @@
    ~~Implement edit button~~
     * Add status - open/closed - hide pledge button if closed
     * Add option to cancel pledge if project still open 
+    * Add check for credit limit not exceeded before allowing pledge
 * ~~Edit page~~
     * ~~implement edit functionality~~
     * ~~bug, reloading when return to projects page~~
@@ -60,9 +61,9 @@
     * ~~bug on saving, null pointer adding user/pledges to projects etc.~~
 * ~~Derive and display total pledged for project~~
 * Fix display of float values - 2 decimals 
-* Implement security
+* ~~Implement security~~
     * show/hide as necessary components if user logged in
-    * insert user name to projects/pledges
+    * insert user name to projects/pledges dynamically
 * ~~Blind link that only the admin knows – not secure, but hey!) that when loaded checks all projects and closes the ones that have reached their time limit or the funding goal.~~
 * Hibernate validation
 * Junit
