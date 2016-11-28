@@ -22,13 +22,13 @@
 	        </div>
 	        <div class="navbar-collapse collapse" id="nav-collapse">
 	            <ul class="nav navbar-nav navbar-right">
-	            	<li><a th:inline="text" sec:authorize="hasRole('USER')">Hello [[${#httpServletRequest.remoteUser}]]</a></li>
-	            	<li><a href="/users/1" sec:authorize="hasRole('USER')"><!-- <"/@{/users/} + ${user.id}"> --><i class="fa fa-tachometer" aria-hidden="true"></i>
+	            	<li><a th:inline="text" sec:authorize="hasAuthority('USER')">Hello [[${#httpServletRequest.remoteUser}]]</a></li>
+	            	<li><a href="/users/1" sec:authorize="hasAuthority('USER')"><!-- <"/@{/users/} + ${user.id}"> --><i class="fa fa-tachometer" aria-hidden="true"></i>
 	            	Dashboard</a></li>
-	            	<li><a href="/login" sec:authorize="!hasRole('USER')"><i class="fa fa-sign-in" aria-hidden="true"></i>
+	            	<li><a href="/login" sec:authorize="!hasAuthority('USER')"><i class="fa fa-sign-in" aria-hidden="true"></i>
 	            	Login</a></li>
 	            	<li></li>
-	            	<li><a href="/logout" sec:authorize="hasRole('USER')">
+	            	<li><a href="/logout" sec:authorize="hasAuthority('USER')">
 	            	<i class="fa fa-sign-out" aria-hidden="true"></i>
 	            	Logout</a></li>  
 	            </ul>

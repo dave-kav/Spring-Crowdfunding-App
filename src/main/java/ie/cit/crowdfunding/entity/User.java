@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,17 +33,18 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String fullName;
-	private String username;
+	@Column(name="username")
+	private String userName;
 	private String password;
 	private float creditLimit;
 	private boolean enabled;
 	
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String username) {
+		this.userName = username;
 	}
 
 	public boolean isEnabled() {
@@ -151,7 +153,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		String out = "User [id=" + id + ", fullname=" + fullName + ", username=" + username
+		String out = "User [id=" + id + ", fullname=" + fullName + ", username=" + userName
 				+ ", creditlimit=" + creditLimit + ", projects =[";
 		for (Project p: projects) {
 			out += p.toString() + ", ";
