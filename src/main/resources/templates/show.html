@@ -27,7 +27,8 @@
                 	<span class="pull-right"><i class="fa fa-eur" aria-hidden="true"></i><span th:text="${project.getTotal()}"></span></span>
                 </li>
             </div>
-            <a th:href="@{/projects/} + ${project.id} + @{/pledges/new}"><button class="btn btn-warning">Add Pledge</button></a>
+            <a th:if="${project.active} == true" th:href="@{/projects/} + ${project.id} + @{/pledges/new}"><button class="btn btn-warning">Add Pledge</button></a>
+            <a th:if="${project.active} == false" ><button class="btn btn-danger disabled">Project Closed</button></a>
         </div>
         <div class="col-md-7">
             <div class="thumbnail">
@@ -45,7 +46,7 @@
                         <em th:text="${project.user.userName}"></em>
                     </p>
 					<h4 class="pull-right">Time Remaining: <span th:text="${project.timeLimit}"></span> days</h4>
-                    <a th:href="@{/projects/} + ${project.id} + @{/edit}"><button class="btn btn-warning">Edit</button></a>               
+                    <a th:if="${#authentication.name} == ${project.user.userName}" th:href="@{/projects/} + ${project.id} + @{/edit}"><button class="btn btn-warning">Edit</button></a>               
                 </div>
             </div>
         </div>
@@ -62,7 +63,7 @@
                 	<span>
                 		Pledges: <span th:text="${project.user.getNumPledges()}"></span>
                 	</span>
-                </li>
+                </li>         
             </div>
         </div>
     </div>

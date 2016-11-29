@@ -14,5 +14,8 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 	@Modifying
 	@Query(value="INSERT INTO User_projects VALUES (:u_id, :p_id)", nativeQuery = true)
 	public void addProjectToUser(@Param("u_id") int user_id, @Param("p_id") int project_id);
+	
+	@Query(value="Select * FROM Users WHERE username = :username", nativeQuery = true)
+	public User findByIdUsername(@Param("username") String username);
 
 }

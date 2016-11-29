@@ -1,6 +1,8 @@
 package ie.cit.crowdfunding.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,8 +72,10 @@ public class ViewController {
 	
 	@RequestMapping(value={"/projects"}, method=RequestMethod.POST)
 	public String addProject(Model model, Project project) {
-		//TODO insert user dynamically depending on logged in
-		project.setUser(userRepository.findOne(1));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+		User u = userRepository.findByIdUsername(name);
+		project.setUser(userRepository.findOne(u.getId()));
 		project = projectRepository.save(project);
 		userRepository.addProjectToUser(userRepository.findOne(1).getId(), project.getId());
 
@@ -90,9 +94,23 @@ public class ViewController {
 		return "projects";
 	}
 	
-	@RequestMapping(value={"/users/{userid}"}, method=RequestMethod.GET)
-	public String userDashboard(Model model, @PathVariable(value="userid") int id) {
-		User u = userRepository.findOne(id);
+	@RequestMapping(value={"/userDashboard"}, method=RequestMethod.GET)
+	public String userDashboard(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+		User u = userRepository.findByIdUsername(name);
+		model.addAttribute("user", u);
+		return "userDashboard";
+	}
+	
+	@RequestMapping(value={"/userDashboard/delete/{pledgeid}"}, method=RequestMethod.POST)
+	public String deletePledge(Model model, @PathVariable(value="pledgeid") int id) {
+		
+		pledgeRepository.deleteFromPledges(id);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+		User u = userRepository.findByIdUsername(name);
 		model.addAttribute("user", u);
 		return "userDashboard";
 	}
@@ -114,10 +132,11 @@ public class ViewController {
 	@RequestMapping(value={"/projects/{projectid}/pledges/"}, method=RequestMethod.POST)
 	public String savePledge(Model model, @PathVariable(value="projectid") int id, Pledge pledge) {
 		Project p = projectRepository.findOne(id);
-		
 		pledge.setPermanent(false);
-		//TODO insert user dynamically depending on logged in
-		pledge.setUser(userRepository.findOne(1));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String name = auth.getName();
+		User u = userRepository.findByIdUsername(name);
+		pledge.setUser(userRepository.findOne(u.getId()));
 		pledge.setProject(p);
 		pledge = pledgeRepository.save(pledge);
 		
@@ -127,4 +146,5 @@ public class ViewController {
 		model.addAttribute("project", p);
 		return "show";
 	}
+	
 }

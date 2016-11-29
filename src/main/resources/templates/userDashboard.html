@@ -33,17 +33,20 @@
 	                    </p>
 						<h4 class="pull-right">Time Remaining: <span th:text="${project.timeLimit}"></span> days</h4>
 						<a th:href="@{/projects/} + ${project.id} + @{/edit}">
-	                    	<button class="btn btn-warning">Edit</button>
+	                    	<button th:if="${project.active} == true" class="btn btn-warning">Edit</button>
+	                    	<button th:if="${project.active} == false" class="btn btn-danger disabled">Project Closed</button>
 	                    </a>	               
                 	</div>
     			</div>
     		</div>
-       		<div class="col-md-6">
+       		<div class="col-md-4">
     			<p class="lead">My Pledges</p>
             	<div class="list-group">
 	                <li class="list-group-item" th:each="pledge : ${user.pledges}">
 	                	<span th:text="${pledge.project.name}"></span>
+	                	
 	                	<span class="pull-right"><i class="fa fa-eur" aria-hidden="true"></i><span th:text="${pledge.amount}"></span></span>
+	                	
 	                </li>
 	                <li class="list-group-item" >
 	                	<strong>Total</strong>
@@ -51,6 +54,19 @@
 	                </li>
 	            </div>
 	            <a href="/projects/new"><button class="btn btn-warning">Add Project</button></a>
+    		</div>
+    		<div class="col-md-2">
+    			<p class="lead"></p>
+    			
+    				<li class="list-group-item" th:each="pledge : ${user.pledges}">
+    					<span class="pull-right">
+    						<a th:href="@{/userDashboard/delete/} +  ${user.pledges.id}">
+    							<button th:if="${pledge.project.active} == true" class="btn btn-warning">Cancel</button>
+    							<button th:if="${pledge.project.active} == false" class="btn btn-danger disabled">Project Closed</button>
+    						</a>
+    					</span>
+    				</li>
+    	
     		</div>
     	</div>
 	</div>

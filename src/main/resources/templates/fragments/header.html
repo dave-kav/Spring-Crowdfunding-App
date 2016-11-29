@@ -19,11 +19,12 @@
 	                <span class="icon-bar"></span>
 	            </button>
 	            <a class="navbar-brand" href="/projects">KickFunder</a>
+	            <a th:if="${#authentication.name} == admin" class="navbar-brand" href="/adminDashboard">Update Site</a>
 	        </div>
 	        <div class="navbar-collapse collapse" id="nav-collapse">
 	            <ul class="nav navbar-nav navbar-right">
 	            	<li><a th:inline="text" sec:authorize="hasAuthority('USER')">Hello [[${#httpServletRequest.remoteUser}]]</a></li>
-	            	<li><a href="/users/1" sec:authorize="hasAuthority('USER')"><!-- <"/@{/users/} + ${user.id}"> --><i class="fa fa-tachometer" aria-hidden="true"></i>
+	            	<li><a href="/userDashboard" sec:authorize="hasAuthority('USER')"><!-- <"/@{/users/} + ${user.id}"> --><i class="fa fa-tachometer" aria-hidden="true"></i>
 	            	Dashboard</a></li>
 	            	<li><a href="/login" sec:authorize="!hasAuthority('USER')"><i class="fa fa-sign-in" aria-hidden="true"></i>
 	            	Login</a></li>
