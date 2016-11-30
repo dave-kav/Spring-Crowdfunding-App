@@ -72,12 +72,16 @@ public class ViewController {
 	
 	@RequestMapping(value={"/projects"}, method=RequestMethod.POST)
 	public String addProject(Model model, Project project) {
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 		User u = userRepository.findByIdUsername(name);
-		project.setUser(userRepository.findOne(u.getId()));
+		
+		project.setUser(u);
 		project = projectRepository.save(project);
-		userRepository.addProjectToUser(userRepository.findOne(1).getId(), project.getId());
+		
+		
+		userRepository.addProjectToUser(u.getId(), project.getId());
 
 		//add all projects to model
 		Iterable<Project> projects = projectRepository.findAll();
@@ -106,11 +110,14 @@ public class ViewController {
 	@RequestMapping(value={"/userDashboard/delete/{pledgeid}"}, method=RequestMethod.POST)
 	public String deletePledge(Model model, @PathVariable(value="pledgeid") int id) {
 		
-		pledgeRepository.deleteFromPledges(id);
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 		User u = userRepository.findByIdUsername(name);
+		
+		userRepository.deletePledgeFromUser(u.getId(), id);
+		projectRepository.deletePledgeFromProject(u.getId(), id);
+		pledgeRepository.delete(id);
+		
 		model.addAttribute("user", u);
 		return "userDashboard";
 	}

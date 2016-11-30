@@ -10,9 +10,9 @@ import ie.cit.crowdfunding.entity.Pledge;
 
 public interface PledgeRepository extends CrudRepository<Pledge, Integer>{
 	
-	@Transactional
+	/*@Transactional
 	@Modifying
 	@Query(value="DELETE FROM Pledges WHERE id = :p_id", nativeQuery = true)
-	public void deleteFromPledges(@Param("p_id") int pledge_id);
+	public void deleteFromPledges(@Param("p_id") int pledge_id);*/
 
 }
