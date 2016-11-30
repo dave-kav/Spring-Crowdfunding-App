@@ -60,7 +60,7 @@
     			
     				<li class="list-group-item" th:each="pledge : ${user.pledges}">
     					<span class="pull-right">
-    						<a th:href="@{/userDashboard/delete/} +  ${user.pledges.id}">
+    						<a th:href="@{/userDashboard/delete/} +  ${pledge.id}">
     							<button th:if="${pledge.project.active} == true" class="btn btn-warning">Cancel</button>
     							<button th:if="${pledge.project.active} == false" class="btn btn-danger disabled">Project Closed</button>
     						</a>
