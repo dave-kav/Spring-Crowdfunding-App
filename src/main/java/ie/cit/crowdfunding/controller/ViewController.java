@@ -109,31 +109,24 @@ public class ViewController {
 		return "userDashboard";
 	}
 	
-	@RequestMapping(value={"/userDashboard/delete/{pledgeid}"}, method=RequestMethod.GET)
-	public String deletePledge(Model model, @PathVariable(value="pledgeid") int id) {
+	@RequestMapping(value={"/projects/{projectid}/pledges/{pledgeid}"}, method=RequestMethod.GET)
+	public String deletePledge(Model model, @PathVariable(value="pledgeid") int pledgeId, 
+											@PathVariable(value="projectid") int projectId) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 		User u = userRepository.findByIdUsername(name);
 		
-		
-	
-		
-		
-		
-		pledgeRepository.delete(pledgeRepository.findOne(id));
-		userRepository.deletePledgeFromUser(u.getId(), id);
-		projectRepository.deletePledgeFromProject(u.getId(), id);
+		pledgeRepository.delete(pledgeRepository.findOne(pledgeId));
+		userRepository.deletePledgeFromUser(u.getId(), pledgeId);
+		projectRepository.deletePledgeFromProject(projectId, pledgeId);
 		
 		userRepository.save(u);
 		
-		//pledgeRepository.deletePledge(id);
-		//model.addAttribute("user", u);
 		Iterable<Project> projects = projectRepository.findAll();
 		model.addAttribute("project_list", projects);
 		return "projects";
 		
-		//return "userDashboard";
 	}
 	
 	@RequestMapping(value={"/projects/new"}, method=RequestMethod.GET)
@@ -161,9 +154,10 @@ public class ViewController {
 		pledge.setProject(p);
 		pledge = pledgeRepository.save(pledge);
 		
-		p.getPledges().add(pledge);
 		p = projectRepository.save(p);
-		
+		userRepository.addPledgeToUser(u.getId(), pledge.getId());
+		projectRepository.addPledgeToProject(p.getId(), pledge.getId());
+
 		model.addAttribute("project", p);
 		return "show";
 	}

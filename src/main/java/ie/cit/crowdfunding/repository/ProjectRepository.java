@@ -18,7 +18,7 @@ public interface ProjectRepository extends CrudRepository<Project, Integer>{
 	@Transactional
 	@Modifying
 	@Query(value="DELETE FROM Project_pledges WHERE project_id = :prj_id AND pledge_id = :pld_id", nativeQuery = true)
-	public void deletePledgeFromProject(@Param("prj_id") int user_id, @Param("pld_id") int project_id);
+	public void deletePledgeFromProject(@Param("prj_id") int project_id, @Param("pld_id") int pledge_id);
 
 	
 }
