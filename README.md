@@ -67,5 +67,7 @@
     * ~~insert user name to projects/pledges dynamically~~
 * ~~Blind link that only the admin knows – not secure, but hey!) that when loaded checks all projects and closes the ones that have reached their time limit or the funding goal.~~
 * Hibernate validation
+    * Validate pledges
+    * Add error messages if possible
 * Junit
 * Internationalization
