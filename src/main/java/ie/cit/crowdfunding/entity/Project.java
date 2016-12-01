@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.URL;
 
 /**
  * 
@@ -28,14 +32,19 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotNull
 	private String name;
+	@NotNull
 	private String description;
+	@URL
 	private String image;
+	@Min(value=1)
 	private float goalAmt;
 	/**
 	 * int value representing number of days remaining,
 	 * easier than messing around with dates  
 	 */
+	@Min(value=1)
 	private int timeLimit;
 	private boolean active;
 
@@ -149,7 +158,6 @@ public class Project {
 		else {
 			return false;
 		}
-		
 	}
 
 	@Override
