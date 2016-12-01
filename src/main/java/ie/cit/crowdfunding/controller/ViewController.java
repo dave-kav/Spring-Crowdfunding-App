@@ -49,6 +49,8 @@ public class ViewController {
 	@RequestMapping(value={"/projects/{projectid}"}, method=RequestMethod.GET)
 	public String showProject(Model model, @PathVariable(value="projectid") int id) {
 		Project p = projectRepository.findOne(id);
+		System.out.println(p.getPledges().toString());
+		
 		model.addAttribute("project", p);
 		return "show";
 	}
@@ -107,19 +109,31 @@ public class ViewController {
 		return "userDashboard";
 	}
 	
-	@RequestMapping(value={"/userDashboard/delete/{pledgeid}"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/userDashboard/delete/{pledgeid}"}, method=RequestMethod.GET)
 	public String deletePledge(Model model, @PathVariable(value="pledgeid") int id) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 		User u = userRepository.findByIdUsername(name);
 		
+		
+	
+		
+		
+		
+		pledgeRepository.delete(pledgeRepository.findOne(id));
 		userRepository.deletePledgeFromUser(u.getId(), id);
 		projectRepository.deletePledgeFromProject(u.getId(), id);
-		pledgeRepository.delete(id);
 		
-		model.addAttribute("user", u);
-		return "userDashboard";
+		userRepository.save(u);
+		
+		//pledgeRepository.deletePledge(id);
+		//model.addAttribute("user", u);
+		Iterable<Project> projects = projectRepository.findAll();
+		model.addAttribute("project_list", projects);
+		return "projects";
+		
+		//return "userDashboard";
 	}
 	
 	@RequestMapping(value={"/projects/new"}, method=RequestMethod.GET)

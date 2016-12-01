@@ -60,6 +60,20 @@
 	            </div>
 	            <a href="/projects/new"><button class="btn btn-warning">Add Project</button></a>
     		</div>    				
+    		</div>
+    		<div class="col-md-2">
+    			<p class="lead"></p>
+    			
+    				<li class="list-group-item" th:each="pledge : ${user.pledges}">
+    					<span class="pull-right">
+    						<a th:href="@{/userDashboard/delete/} +  ${pledge.id}" class="btn btn-warning">Cancel
+							</a>
+    							<button th:if="${pledge.project.active} == false" class="btn btn-danger disabled">Project Closed</button>
+    						
+    					</span>
+    				</li>
+    	
+    		</div>
     	</div>
 	</div>
 <script src="https://code.jquery.com/jquery-2.2.4.js"></script>

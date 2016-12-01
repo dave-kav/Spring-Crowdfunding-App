@@ -40,13 +40,13 @@ public class Project {
 	private boolean active;
 
 	// list of pledges made to this project
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
 	@JoinTable(name="project_pledges",
 		joinColumns={@JoinColumn(name="project_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="pledge_id", referencedColumnName="id")})
 	private List<Pledge> pledges;
 	
-	@ManyToMany(mappedBy="projects", cascade = {CascadeType.ALL})
+	@ManyToMany(mappedBy="projects", cascade = {CascadeType.PERSIST})
 	private List<User> users;
 	
 	public Project () {
@@ -140,6 +140,16 @@ public class Project {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	public boolean pledgesEmpty() {
+		if(pledges.isEmpty()){
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 
 	@Override
