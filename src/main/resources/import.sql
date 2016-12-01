@@ -7,13 +7,13 @@ INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit, active
 INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit, active) VALUES (3, 'Findster Duo - The 1st GPS Pet Tracker Free of Monthly Fees!', 'Findster Duo tracks your pets’ location using GPS with no data fees, and rewards you for keeping them healthy! Smart. Connected. Fun.', 'https://ksr-ugc.imgix.net/assets/012/925/070/6710c78aee17b9225cf4ccd1a1194f7f_original.png?w=680&fit=max&v=1467382915&auto=format&lossless=true&s=e412ed1cd0b66d859de6a3eec4fcaf80', 50000, 45, true);
 INSERT INTO Projects (id, name, description, image, goal_Amt, time_Limit, active) VALUES (4, 'AE modular - a modular synthesizer for everyone', 'A true analog modular synthesizer - small in size, small in price, big in sound ', 'https://ksr-ugc.imgix.net/assets/014/475/365/e9b7905bad2c7623a2811835cbc36d79_original.jpg?w=680&fit=max&v=1478877110&auto=format&q=92&s=e0d5be13815cfb69b81f385056aa8642', 10000, 20, true);
 
-INSERT INTO Pledges VALUES (1, 150, false);
-INSERT INTO Pledges VALUES (2, 100, false);
-INSERT INTO Pledges VALUES (3, 50, false);
-INSERT INTO Pledges VALUES (4, 70, false);
-INSERT INTO Pledges VALUES (5, 500, false);
-INSERT INTO Pledges VALUES (6, 100, false);
-INSERT INTO Pledges VALUES (7, 1000, false);
+INSERT INTO Pledges (id, amount, permanent) VALUES (1, 150, false);
+INSERT INTO Pledges (id, amount, permanent) VALUES (2, 100, false);
+INSERT INTO Pledges (id, amount, permanent) VALUES (3, 50, false);
+INSERT INTO Pledges (id, amount, permanent) VALUES (4, 70, false);
+INSERT INTO Pledges (id, amount, permanent) VALUES (5, 500, false);
+INSERT INTO Pledges (id, amount, permanent) VALUES (6, 100, false);
+INSERT INTO Pledges (id, amount, permanent) VALUES (7, 1000, false);
 
 INSERT INTO User_projects VALUES (1,1), (2,2), (3,3), (1,4);
 

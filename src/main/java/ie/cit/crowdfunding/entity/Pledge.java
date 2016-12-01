@@ -33,10 +33,10 @@ public class Pledge {
 	 */
 	private boolean permanent;
 	
-	@ManyToMany(mappedBy="pledges", cascade = {CascadeType.ALL})
+	@ManyToMany(mappedBy="pledges", cascade = {CascadeType.PERSIST})
 	private List<User> users;
 	
-	@ManyToMany(mappedBy="pledges", cascade = {CascadeType.ALL})
+	@ManyToMany(mappedBy="pledges", cascade = {CascadeType.PERSIST})
 	private List<Project> projects; 
 	
 	public Pledge() {
