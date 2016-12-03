@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
-
+import javax.validation.constraints.*;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -26,6 +26,8 @@ public class Pledge {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@NotNull
+	@Min(0)
 	private float amount;
 	/**
 	 * user can cancel a pledge, but not after a project's

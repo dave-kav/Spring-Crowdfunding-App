@@ -13,10 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
-import org.hibernate.validator.constraints.URL;
+import org.hibernate.validator.constraints.*;
 
 /**
  * 
@@ -33,18 +32,20 @@ public class Project {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@NotNull
+	@Length(min=3)
 	private String name;
 	@NotNull
+	@Length(min=15)
 	private String description;
-	@URL
+	
 	private String image;
-	@Min(value=1)
+	@Min(1)
 	private float goalAmt;
 	/**
 	 * int value representing number of days remaining,
 	 * easier than messing around with dates  
 	 */
-	@Min(value=1)
+	@Min(1)
 	private int timeLimit;
 	private boolean active;
 
