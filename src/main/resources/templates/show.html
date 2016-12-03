@@ -54,9 +54,9 @@
         	<p class="lead">User Profile</p>
             <div class="list-group">
                 <li id="projects" class="list-group-item" th:text="${project.user.fullName}"></li>
-                <a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#projects">
+                <a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm">
 	                <span>
-	                		Projects: <span th:text="${project.user.getNumProjects()}"></span>
+	                	Projects: <span th:text="${project.user.getNumProjects()}"></span>
 	               	</span>
                 </a>
                 <div id="sm" class="sublinks collapse">
@@ -68,7 +68,10 @@
                 	</span>
                	</a>
                 <div id="mm" class="sublinks collapse">
-					<li class="list-group-item small" th:each="pledge : ${project.user.getPledges()}" th:text="${pledge.amount}"></li>
+					<li class="list-group-item small" th:each="pledge : ${project.user.getPledges()}">
+						<span th:text="${pledge.project.name}"></span> - <i class="fa fa-eur" aria-hidden="true"></i>
+						<span th:text="${pledge.amount}"></span>
+					</li>
 				</div>        
             </div>
         </div>
