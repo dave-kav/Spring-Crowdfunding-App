@@ -163,10 +163,10 @@ public class ViewController {
 		pledge.setProject(p);
 		pledge = pledgeRepository.save(pledge);
 		
-		p = projectRepository.save(p);
 		userRepository.addPledgeToUser(u.getId(), pledge.getId());
 		projectRepository.addPledgeToProject(p.getId(), pledge.getId());
-
+		p = projectRepository.save(p);
+		p.getPledges().add(pledge); //for initial display only
 		model.addAttribute("project", p);
 		return "show";
 	}

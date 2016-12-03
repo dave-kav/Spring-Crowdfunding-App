@@ -37,7 +37,7 @@ public class Project {
 	@NotNull
 	@Length(min=15)
 	private String description;
-	
+	@URL
 	private String image;
 	@Min(1)
 	private float goalAmt;

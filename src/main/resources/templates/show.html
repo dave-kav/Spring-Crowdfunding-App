@@ -41,11 +41,11 @@
                    		</h4>
                 	</div>
                     <h4 th:text="${project.name}"><a></a></h4>
-                    <p th:text="${project.description}"></p>    
+                    <p th:text="${project.description}"></p>
+                    <h4 class="pull-right">Time Remaining: <span th:text="${project.timeLimit}"></span> days</h4>    
                     <p> Submitted by 
                         <em th:text="${project.user.userName}"></em>
-                    </p>
-					<h4 class="pull-right">Time Remaining: <span th:text="${project.timeLimit}"></span> days</h4>
+                    </p>					
                     <a th:if="${#authentication.name} == ${project.user.userName}" th:href="@{/projects/} + ${project.id} + @{/edit}"><button class="btn btn-warning">Edit</button></a>               
                 </div>
             </div>
@@ -53,17 +53,23 @@
         <div class="col-md-2">
         	<p class="lead">User Profile</p>
             <div class="list-group">
-                <li class="list-group-item" th:text="${project.user.fullName}"></li>
-                <li class="list-group-item">
-                	<span>
-                		Projects: <span th:text="${project.user.getNumProjects()}"></span>
-                	</span>
-                </li>
-                 <li class="list-group-item">
+                <li id="projects" class="list-group-item" th:text="${project.user.fullName}"></li>
+                <a href="#" class="list-group-item" data-toggle="collapse" data-target="#sm" data-parent="#projects">
+	                <span>
+	                		Projects: <span th:text="${project.user.getNumProjects()}"></span>
+	               	</span>
+                </a>
+                <div id="sm" class="sublinks collapse">
+					<li class="list-group-item small" th:each="project : ${project.user.getProjects()}" th:text="${project.name}"></li>
+				</div>
+                <a href="#" class="list-group-item" data-toggle="collapse" data-target="#mm">
                 	<span>
                 		Pledges: <span th:text="${project.user.getNumPledges()}"></span>
                 	</span>
-                </li>         
+               	</a>
+                <div id="mm" class="sublinks collapse">
+					<li class="list-group-item small" th:each="pledge : ${project.user.getPledges()}" th:text="${pledge.amount}"></li>
+				</div>        
             </div>
         </div>
     </div>
