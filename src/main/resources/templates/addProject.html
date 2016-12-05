@@ -17,7 +17,7 @@
 	    <div class="row">
 	        <h1 style="text-align: center;">Create a new Project</h1>
 	        <div style="width: 30%; margin: 35px auto;">
-	            <form action="#" th:action="@{/projects}" th:object="${project}" method="post">
+	            <form id="addPrj" action="#" th:action="@{/projects}" th:object="${project}" method="post">
 	                <div class="form-group">
 	                    <input class="form-control" type="text" name="name" placeholder="name" th:field="*{name}"></input>
 	                </div>
@@ -29,7 +29,8 @@
 	                </div>
 	                <div class="form-group">
 	                    <input class="form-control" type="text" th:field="*{goalAmt}"></input>
-	                    <p th:if="${message != null}" th:text="${message}">Must be positive value!</p>	                    
+	                    <p th:if="${#fields.hasErrors('goalAmt')}" th:errors="*{goalAmt}">Please enter numbers only!!</p>
+	                    
 	                </div>
 	                <div class="form-group">
 	                    <input class="form-control" type="text" name="time_limit" placeholder="time limit" th:field="*{timeLimit}"></input>

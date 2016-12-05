@@ -1,5 +1,8 @@
 package ie.cit.crowdfunding.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -81,6 +85,9 @@ public class ViewController {
 		//if error in form redirect
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("project", new Project());
+			List<ObjectError> abc = bindingResult.getAllErrors();
+			System.out.println("\nError List - -------------------------\n");
+			System.out.println(abc.toString());
 			return "redirect:/projects/new";
         }
 		
@@ -149,11 +156,26 @@ public class ViewController {
 		Project p = projectRepository.findOne(id);
 		model.addAttribute("project", p);
 		model.addAttribute("pledge", new Pledge());
+		
 		return "addPledge";
 	}
 	
 	@RequestMapping(value={"/projects/{projectid}/pledges/"}, method=RequestMethod.POST)
-	public String savePledge(Model model, @PathVariable(value="projectid") int id, Pledge pledge) {
+	public String savePledge(Model model, @PathVariable(value="projectid") int id, 
+								@Valid Pledge pledge, BindingResult bindingResult) {
+		
+		//if error in form redirect
+		if (bindingResult.hasErrors()) {
+			Project p = projectRepository.findOne(id);
+			model.addAttribute("project", p);
+			model.addAttribute("pledge", new Pledge());
+			
+			List<ObjectError> abc = bindingResult.getAllErrors();
+			System.out.println("\nError List - -------------------------\n");
+			System.out.println(abc.toString());
+			return "redirect:/projects/{projectid}/pledges/new/";
+        }
+		
 		Project p = projectRepository.findOne(id);
 		pledge.setPermanent(false);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
