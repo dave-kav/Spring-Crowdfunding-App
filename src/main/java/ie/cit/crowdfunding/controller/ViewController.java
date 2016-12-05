@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ie.cit.crowdfunding.entity.Pledge;
 import ie.cit.crowdfunding.entity.Project;
@@ -36,6 +38,9 @@ public class ViewController {
 	@Autowired
 	UpdateService updateService;
 	
+	public int errors1 = 0;
+	public int errors2 = 0;
+	
 	@RequestMapping(value={"/login"}, method=RequestMethod.GET)
 	public String login() {
 		return "login";
@@ -48,6 +53,8 @@ public class ViewController {
 	
 	@RequestMapping(value={"/projects"}, method=RequestMethod.GET)
 	public String projects(Model model) {
+		this.setPledgeErrorCount(0);
+		this.setProjectErrorCount(0);
 		Iterable<Project> projects = projectRepository.findAll();
 		model.addAttribute("project_list", projects);
 		return "projects";
@@ -80,14 +87,11 @@ public class ViewController {
 	}
 	
 	@RequestMapping(value={"/projects"}, method=RequestMethod.POST)
-	public String addProject(@Valid Project project, BindingResult bindingResult, Model model) {
+	public String addProject(@Valid Project project, BindingResult bindingResult, Model model ) {
 		
 		//if error in form redirect
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("project", new Project());
-			List<ObjectError> abc = bindingResult.getAllErrors();
-			System.out.println("\nError List - -------------------------\n");
-			System.out.println(abc.toString());
+			this.setProjectErrorCount(bindingResult.getErrorCount());
 			return "redirect:/projects/new";
         }
 		
@@ -104,11 +108,14 @@ public class ViewController {
 		//add all projects to model
 		Iterable<Project> projects = projectRepository.findAll();
 		model.addAttribute("project_list", projects);
+		this.setProjectErrorCount(0);
 		return "projects";
 	}
 	
 	@RequestMapping(value={"/adminDashboard"}, method=RequestMethod.GET)
 	public String adminDashboard(Model model) {
+		this.setPledgeErrorCount(0);
+		this.setProjectErrorCount(0);
 		updateService.updateProjects();
 		
 		Iterable<Project> projects = projectRepository.findAll();
@@ -118,6 +125,8 @@ public class ViewController {
 	
 	@RequestMapping(value={"/userDashboard"}, method=RequestMethod.GET)
 	public String userDashboard(Model model) {
+		this.setPledgeErrorCount(0);
+		this.setProjectErrorCount(0);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 		User u = userRepository.findByIdUsername(name);
@@ -148,6 +157,8 @@ public class ViewController {
 	@RequestMapping(value={"/projects/new"}, method=RequestMethod.GET)
 	public String newProject(Model model) {
 		model.addAttribute("project", new Project());
+		model.addAttribute("error", this.getProjectErrorCount());
+		
 		return "addProject";
 	}
 	
@@ -156,6 +167,7 @@ public class ViewController {
 		Project p = projectRepository.findOne(id);
 		model.addAttribute("project", p);
 		model.addAttribute("pledge", new Pledge());
+		model.addAttribute("error", this.getPledgeErrorCount());
 		
 		return "addPledge";
 	}
@@ -166,13 +178,7 @@ public class ViewController {
 		
 		//if error in form redirect
 		if (bindingResult.hasErrors()) {
-			Project p = projectRepository.findOne(id);
-			model.addAttribute("project", p);
-			model.addAttribute("pledge", new Pledge());
-			
-			List<ObjectError> abc = bindingResult.getAllErrors();
-			System.out.println("\nError List - -------------------------\n");
-			System.out.println(abc.toString());
+			this.setPledgeErrorCount(bindingResult.getErrorCount());
 			return "redirect:/projects/{projectid}/pledges/new/";
         }
 		
@@ -190,7 +196,24 @@ public class ViewController {
 		p = projectRepository.save(p);
 		p.getPledges().add(pledge); //for initial display only
 		model.addAttribute("project", p);
+		this.setPledgeErrorCount(0);
 		return "show";
+	}
+	
+	public void setProjectErrorCount(int num) {
+		errors1 = num;
+	}
+	
+	public int getProjectErrorCount() {
+		return errors1;
+	}
+	
+	public void setPledgeErrorCount(int num) {
+		errors2 = num;
+	}
+	
+	public int getPledgeErrorCount() {
+		return errors2;
 	}
 	
 }

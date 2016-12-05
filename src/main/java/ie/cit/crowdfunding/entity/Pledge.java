@@ -27,7 +27,7 @@ public class Pledge {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@NotNull
-	@Min(0)
+	@Min(1)
 	private float amount;
 	/**
 	 * user can cancel a pledge, but not after a project's
