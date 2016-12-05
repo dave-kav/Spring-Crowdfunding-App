@@ -4,7 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="UTF-8"></meta>
-  <title>KickFundr - Login</title>
+  <title th:text="#{app.title}"></title>
       <link rel="stylesheet" href="css/login.css"></link>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
       <script src="https://use.fontawesome.com/4709fbc9b6.js"></script>
@@ -14,19 +14,17 @@
 	<div th:replace="fragments/header :: header">&nbsp;</div>
 	<div class="wrapper">
 	<div class="container1">
-		<h1>Welcome</h1>
+		<h1 style="color:white;" th:text="#{login.greeting}"></h1>
+		
 		<form th:action="@{/login}" method="post">
 			<input type="text" name="username" placeholder="Username"></input>
 			<input type="password" name="password" placeholder="Password"></input>
-			<button type="submit" id="login">Login</button>
+			<button type="submit" id="login" th:text="#{button.login}"></button>
 		</form>
+	<h3 style="color:white;" th:if="${param.error}" th:text="#{login.errMsg}"> </h3>
+	<h3 style="color:white;" th:if="${param.logout}" th:text="#{login.logoutMsg}"> </h3>
 	</div>
-	<div th:if="${param.error}">
-            Invalid username and password.
-    </div>
-    <div th:if="${param.logout}">
-            You have been logged out.
-    </div>
+
 	<ul class="bg-bubbles">
 		<li></li>
 		<li></li>

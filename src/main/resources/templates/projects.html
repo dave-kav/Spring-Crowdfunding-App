@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>KickFundr - Projects</title>
+	<title th:text="#{app.title}"></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="/css/style.css"></link>
 	<script src="https://use.fontawesome.com/4709fbc9b6.js"></script>
@@ -15,8 +15,8 @@
 
 	<div class="container">
 		<div class="jumbotron">
-			<h1><i class="fa fa-money" aria-hidden="true"></i> KickFundr</h1>
-			<p>Crowd fund your vision to make it a reality!</p>
+			<h1 th:text="#{app.title}"><i class="fa fa-money" aria-hidden="true"></i></h1>
+			<p th:text="#{projects.desc}"></p>
 		</div>	
 	
 		<div class="row" style="display:flex: flex-wrap: wrap;">	
@@ -29,18 +29,18 @@
 					<div class="caption-full">
 						<p th:text="${project.description}"></p>
 						<div class="pull-right">
-							<h4>Target</h4>
+							<h4 th:text="#{projects.target}"></h4>
 							<span><i class="fa fa-eur" aria-hidden="true"></i><strong><span th:text="${project.goalAmt}"></span></strong></span>
 						</div>
 						<p></p>
 						<div>
-							<h4>Time Remaining</h4>
-							<span><span th:text="${project.timeLimit}"></span> days</span>
+							<h4 th:text="#{projects.timeLeft}"></h4>
+							<span><span th:text="${project.timeLimit}"></span> <span th:text="#{projects.days}"></span></span>
 							
 						</div>
 					</div>
 					<p>
-	                    <a th:href="@{/projects/} + ${project.id}" class="btn btn-primary">More Info</a>
+	                    <a th:href="@{/projects/} + ${project.id}" class="btn btn-primary" th:text="#{button.moreInfo}"></a>
 	                </p>
 				</div>
 			</div>

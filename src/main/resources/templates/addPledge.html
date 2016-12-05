@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Add Project</title>
+	<title th:text="#{app.title}"></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="/css/style.css"></link>
 	<script src="https://use.fontawesome.com/4709fbc9b6.js"></script>
@@ -15,22 +15,22 @@
 	
 	<div class="container">
 	    <div class="row">
-	        <h1 style="text-align: center;"><span>Pledge to <span th:text="${project.name}"></span></span></h1>
+	        <h1 style="text-align: center;"><span th:text="#{addPledge.description}"></span> <span th:text="${project.name}"></span></h1>
 	        <div style="width: 30%; margin: 35px auto;">
 	            <form action="#" th:action="@{/projects/} + ${project.id} + @{/pledges/}" th:object="${pledge}" method="post">
 	                <div class="form-group">
 	                    <input class="form-control" type="text" name="amount" placeholder="name" th:field="*{amount}"></input>
 	                </div>
 	                <div class="form-group" style="color: red;" th:if="${error} != 0">
-	                	<h3>Form Error</h3>
-	                	<p>Please ensure only numbers are entered!!</p>
+	                	<h3 th:text="#{error.formTitle}">Form Error</h3>
+	                	<p th:text="#{error.pledgeDesc}"></p>
 	                </div>
 	                <div class="form-group">
-	                    <button class="btn btn-lg btn-primary btn-block" th:if="${project.user.creditLimit} > 0">Submit!</button>
-	                    <a th:if="${project.user.creditLimit} == 0" ><button class="btn btn-lg btn-danger disabled btn-block">No Credits!</button></a>                                 
+	                    <button class="btn btn-lg btn-primary btn-block" th:if="${project.user.creditLimit} > 0" th:text="#{button.submit}"></button>
+	                    <a th:if="${project.user.creditLimit} == 0" ><button class="btn btn-lg btn-danger disabled btn-block" th:text="#{addPledge.noCredits}"></button></a>                                 
 	                </div>
 	        	</form>
-	        <a href="/projects">Cancel</a>
+	        <a href="/projects" th:text="#{button.cancel}"></a>
 	        </div>
 	    </div>
 	</div>

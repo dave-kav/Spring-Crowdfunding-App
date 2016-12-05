@@ -2,6 +2,7 @@ package ie.cit.crowdfunding;
 
 import java.sql.DatabaseMetaData;
 import java.util.List;
+import java.util.Locale;
 
 import javax.sql.DataSource;
 
@@ -9,6 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import ie.cit.crowdfunding.entity.Pledge;
 import ie.cit.crowdfunding.entity.Project;
@@ -18,7 +25,8 @@ import ie.cit.crowdfunding.repository.ProjectRepository;
 import ie.cit.crowdfunding.repository.UserRepository;
 
 @SpringBootApplication
-public class CrowdfundingApplication  implements CommandLineRunner {
+@Configuration 
+public class CrowdfundingApplication extends WebMvcConfigurerAdapter implements CommandLineRunner {
 
 	@Autowired
 	UserRepository userRepository;
@@ -75,4 +83,23 @@ public class CrowdfundingApplication  implements CommandLineRunner {
 			System.out.println(p.toString());
 		}
 	}
+	
+	@Bean
+	public CookieLocaleResolver localeResolver() {
+		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+		localeResolver.setDefaultLocale(Locale.US);
+		return localeResolver;
+	}
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+		lci.setParamName("lang");
+		return lci;
+	}
+	
+	@Override
+    public void addInterceptors(InterceptorRegistry registry)
+    {
+    	registry.addInterceptor(localeChangeInterceptor());
+    }
 }

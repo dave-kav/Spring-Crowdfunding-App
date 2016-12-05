@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Edit Project</title>
+	<title th:text="#{app.title}"></title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="/css/style.css"></link>
 	<script src="https://use.fontawesome.com/4709fbc9b6.js"></script>
@@ -15,7 +15,10 @@
 	
 	<div class="container">
 	    <div class="row">
-	        <h1 style="text-align: center;"><span>Edit "</span><span th:text="${project.name}"></span>"</h1>
+	        <h1 style="text-align:center;">
+	        	<span th:text="#{editProject.desc}"></span>
+	        	<span th:text="${project.name}"></span>
+	        </h1>
 	        <div style="width: 30%; margin: 35px auto;">
 	            <form action="#" th:action="@{/projects/} + ${project.id}" th:object="${project}" method="POST">
 	                <div class="form-group">
@@ -24,10 +27,10 @@
                    		</textarea>
 	                </div>
 	                <div class="form-group">
-	                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+	                    <button class="btn btn-lg btn-primary btn-block" th:text="#{button.submit}"></button>
 	                </div>
 	        </form>
-	        <a href="#" onClick="history.go(-1)">Go Back</a>
+	        <a href="/projects" th:text="#{button.cancel}"></a>
 	        </div>
 	    </div>
 	</div>
