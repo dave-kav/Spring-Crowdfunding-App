@@ -1,6 +1,5 @@
 package ie.cit.crowdfunding.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,12 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import ie.cit.crowdfunding.entity.Pledge;
 import ie.cit.crowdfunding.entity.Project;
 import ie.cit.crowdfunding.entity.User;
@@ -163,7 +159,7 @@ public class ViewController {
 	}
 	
 	@RequestMapping(value={"/projects/{projectid}/pledges/new"}, method=RequestMethod.GET)
-	public String newPledge(Model model, @PathVariable(value="projectid") int id) {
+	public String newPledge(Model model, @PathVariable(value="projectid") int id) {	
 		Project p = projectRepository.findOne(id);
 		model.addAttribute("project", p);
 		model.addAttribute("pledge", new Pledge());
@@ -178,15 +174,43 @@ public class ViewController {
 		
 		//if error in form redirect
 		if (bindingResult.hasErrors()) {
-			this.setPledgeErrorCount(bindingResult.getErrorCount());
+			System.out.println(bindingResult);
+			this.setPledgeErrorCount(1);
 			return "redirect:/projects/{projectid}/pledges/new/";
-        }
+        }	
 		
-		Project p = projectRepository.findOne(id);
-		pledge.setPermanent(false);
+		boolean noFunds = false;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 		User u = userRepository.findByIdUsername(name);
+		int userId = u.getId();
+		float total = 0;
+		List<Pledge> pList = pledgeRepository.findAllPledges();
+		for (int i = 0; i < pList.size(); i++)
+		{
+			List<User> uList = pList.get(i).getUsers();
+			int pledgeUserId = uList.get(0).getId();
+			if (pledgeUserId == userId)
+			{
+				total += pList.get(i).getAmount();
+			}
+		}
+		
+		if ((total + pledge.getAmount()) >= u.getCreditLimit())
+		{
+			noFunds = true;
+		}
+		
+		if (noFunds)
+		{
+			ObjectError error = new ObjectError("creditLow","Not enough credit");
+			bindingResult.addError(error);
+			this.setPledgeErrorCount(2);
+			return "redirect:/projects/{projectid}/pledges/new/";
+		}
+		
+		Project p = projectRepository.findOne(id);
+		pledge.setPermanent(false);
 		pledge.setUser(userRepository.findOne(u.getId()));
 		pledge.setProject(p);
 		pledge = pledgeRepository.save(pledge);

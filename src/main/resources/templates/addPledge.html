@@ -21,9 +21,14 @@
 	                <div class="form-group">
 	                    <input class="form-control" type="text" name="amount" placeholder="name" th:field="*{amount}"></input>
 	                </div>
-	                <div class="form-group" style="color: red;" th:if="${error} != 0">
-	                	<h3 th:text="#{error.formTitle}">Form Error</h3>
+	                <div class="form-group" style="color: red;" th:if="${error} == 1">
+	                	<h3 th:text="#{error.formTitle}"></h3>
 	                	<p th:text="#{error.pledgeDesc}"></p>
+	                </div>
+	                 <div class="form-group" style="color: red;" th:if="${error} == 2">
+	                	<h3 th:text="#{error.formTitle}"></h3>
+	                	<p th:text="#{error.lowCredits}"></p>
+	   
 	                </div>
 	                <div class="form-group">
 	                    <button class="btn btn-lg btn-primary btn-block" th:if="${project.user.creditLimit} > 0" th:text="#{button.submit}"></button>
