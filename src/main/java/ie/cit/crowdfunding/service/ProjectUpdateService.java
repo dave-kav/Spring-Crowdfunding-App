@@ -24,11 +24,11 @@ public class ProjectUpdateService implements UpdateService {
 			int timeLimit = project.getTimeLimit();
 			float totalPledged = project.getTotal();
 			
-			if (timeLimit > 0)
+			if (timeLimit >= 1)
 				project.setTimeLimit(timeLimit - 1);
 			
 			// if time to raise funds elapsed or goal met
-			if (timeLimit == 0 ||totalPledged >= project.getGoalAmt()) {
+			if (timeLimit <= 1 ||totalPledged >= project.getGoalAmt()) {
 				project.setActive(false);
 				//get all pledges
 				List<Pledge> pledges = project.getPledges();

@@ -45,7 +45,7 @@ public class Project {
 	 * int value representing number of days remaining,
 	 * easier than messing around with dates  
 	 */
-	@Min(1)
+	@Min(0)
 	private int timeLimit;
 	private boolean active;
 

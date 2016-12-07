@@ -18,15 +18,18 @@
 	                <span class="icon-bar"></span>
 	                <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="/projects" th:text="#{app.title}"></a>
-	            <p>
-					<a href="/?lang=fr">French</a> | <a href="/?lang=en">English</a>
-				</p>	
+	            <a class="navbar-brand" href="/projects" th:text="#{app.title}"></a> 
+            	<a th:if="${#authentication.name} == admin" class="navbar-brand" href="/adminDashboard" th:text="#{header.updateSite}"></a>    
 	        </div>
 	        <div class="navbar-collapse collapse" id="nav-collapse">
+	        	<ul class="nav navbar-nav navbar-right">
+					<li><a href="?lang=fr">French</a></li>
+					<li><a href="#">|</a></li>
+					<li><a href="?lang=en">English</a></li>
+				</ul>
 	            <ul class="nav navbar-nav navbar-right">
 	            	<li><a th:inline="text" sec:authorize="hasAuthority('USER')"><span th:text="#{header.greeting}"></span> [[${#httpServletRequest.remoteUser}]]</a></li>
-	            	<li><a th:if="${#authentication.name} == admin" class="navbar-brand" href="/adminDashboard" th:text="#{header.updateSite}"></a></li>
+
 	            	<li><a href="/userDashboard" sec:authorize="hasAuthority('USER')" th:text="#{button.dashboard}">
 	            	<!-- <"/@{/users/} + ${user.id}"> --><i class="fa fa-tachometer" aria-hidden="true"></i>
 	            	</a></li>

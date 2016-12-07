@@ -179,36 +179,18 @@ public class ViewController {
 			return "redirect:/projects/{projectid}/pledges/new/";
         }	
 		
-		boolean noFunds = false;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName();
 		User u = userRepository.findByIdUsername(name);
-		int userId = u.getId();
-		float total = 0;
-		List<Pledge> pList = pledgeRepository.findAllPledges();
-		for (int i = 0; i < pList.size(); i++)
-		{
-			List<User> uList = pList.get(i).getUsers();
-			int pledgeUserId = uList.get(0).getId();
-			if (pledgeUserId == userId)
-			{
-				total += pList.get(i).getAmount();
-			}
-		}
 		
-		if ((total + pledge.getAmount()) >= u.getCreditLimit())
-		{
-			noFunds = true;
-		}
-		
-		if (noFunds)
+		if ((u.getPledgeTotal() + pledge.getAmount()) >= u.getCreditLimit())
 		{
 			ObjectError error = new ObjectError("creditLow","Not enough credit");
 			bindingResult.addError(error);
 			this.setPledgeErrorCount(2);
 			return "redirect:/projects/{projectid}/pledges/new/";
 		}
-		
+	
 		Project p = projectRepository.findOne(id);
 		pledge.setPermanent(false);
 		pledge.setUser(userRepository.findOne(u.getId()));
