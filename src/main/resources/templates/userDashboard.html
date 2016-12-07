@@ -35,7 +35,7 @@
 						<h4 class="pull-right"><span th:text="#{projects.timeLeft}"></span>: <span th:text="${project.timeLimit}"></span> days</h4>
 						<a th:href="@{/projects/} + ${project.id} + @{/edit}">
 	                    	<button th:if="${project.active} == true" class="btn btn-warning" th:text="#{button.edit}"></button>
-	                    	<button th:if="${project.active} == false" class="btn btn-danger disabled" th:text="#{show.projClosed}"></button>
+	                    	<button th:if="${project.active} == false" class="btn btn-danger disabled" th:text="#{show.projClosed}" disabled="true"></button>
 	                    </a>	               
                 	</div>
     			</div>
@@ -51,7 +51,7 @@
                 		<li class="list-group-item" th:each="pledge : ${user.pledges}">
 							<span th:text="${pledge.project.name}"></span><a th:href="@{/projects/} + ${pledge.project.id} + @{/pledges/} + ${pledge.id}">
 	   							<button th:if="${pledge.project.active} == true" class="btn btn-danger btn-xs pull-right" Onclick="return ConfirmDelete()">Cancel</button>
-	   							<button th:if="${pledge.project.active} == false" class="btn btn-danger disabled btn-sm pull-right">Project Closed</button>
+	   							<button th:if="${pledge.project.active} == false" class="btn btn-danger disabled btn-sm pull-right" disabled="true">Project Closed</button>
 	   						</a>
    						</li>
 					</div>
