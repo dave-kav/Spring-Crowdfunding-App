@@ -29,7 +29,7 @@
 	                	</div>
 	                    <h4 th:text="${project.name}"><a></a></h4>
 	                    <p th:text="${project.description}"></p>    
-	                    <p> <span th:text="show.subBy"></span> 
+	                    <p> <span th:text="#{show.subBy}"></span> 
 	                        <em th:text="${project.user.userName}"></em>
 	                    </p>
 						<h4 class="pull-right"><span th:text="#{projects.timeLeft}"></span>: <span th:text="${project.timeLimit}"></span> days</h4>
